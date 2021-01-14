@@ -11,14 +11,10 @@ repository = "https://github.com/ruma/synapse-admin-api"
 edition = "2018"
 
 [dependencies]
+ruma = { version = "0.0.2", features = ["ruma-api"] }
 #assign = "1.1.1"
 #js_int = { version = "0.2.0", features = ["serde"] }
-#ruma-api = { version = "=0.17.0-alpha.2" }
-#ruma-common = { version = "=0.3.0-alpha.1" }
-#ruma-events = { version = "=0.22.0-alpha.2" }
-#ruma-identifiers = { version = "=0.18.0-alpha.1" }
-#ruma-serde = { version = "0.3.0" }
-#serde = { version = "1.0.118", features = ["derive"] }
+serde = { version = "1.0.118", features = ["derive"] }
 #serde_json = "1.0.61"
 
 [features]
