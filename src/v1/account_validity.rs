@@ -22,7 +22,7 @@ ruma_api! {
         /// This is an optional parameter, it overrides the expiration date,
         /// which otherwise defaults to now + validity period configured at the server
         #[serde(
-            with = "ruma_serde::time::opt_ms_since_unix_epoch",
+            with = "ruma::serde::time::opt_ms_since_unix_epoch",
             skip_serializing_if = "Option::is_none"
         )]
         pub expiration_ts: Option<SystemTime>,
@@ -35,7 +35,7 @@ ruma_api! {
 
     response: {
         /// The new expiration date for this account, as a timestamp in milliseconds since epoch
-        #[serde(with = "ruma_serde::time::ms_since_unix_epoch")]
+        #[serde(with = "ruma::serde::time::ms_since_unix_epoch")]
         pub expiration_ts: SystemTime,
     }
 }
