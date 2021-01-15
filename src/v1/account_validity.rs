@@ -41,7 +41,7 @@ ruma_api! {
 }
 
 impl<'a> Request<'a> {
-    /// Creates an empty `Request`.
+    /// Creates an `Request` with the given user ID.
     pub fn new(user_id: &'a UserId) -> Self {
         Self {
             user_id,
@@ -53,7 +53,6 @@ impl<'a> Request<'a> {
 
 impl Response {
     /// Creates a `Response` with the new expiration date for this account,
-    /// as a timestamp in milliseconds since epoch.
     pub fn new(expiration_ts: SystemTime) -> Self {
         Self { expiration_ts }
     }

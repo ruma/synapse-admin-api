@@ -1,3 +1,5 @@
+//! [GET /_synapse/admin/v1/server_version](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/version_api.rst)
+
 use ruma::api::ruma_api;
 
 ruma_api! {
