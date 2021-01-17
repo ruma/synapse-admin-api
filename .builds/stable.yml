@@ -2,7 +2,7 @@ image: archlinux
 packages:
   - rustup
 sources:
-  - https://github.com/ruma/ruma
+  - https://github.com/ruma/synapse-admin-api
 tasks:
   - rustup: |
       # We specify --profile minimal because we'd otherwise download docs
