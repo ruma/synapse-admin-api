@@ -2,8 +2,7 @@
 
 use std::time::SystemTime;
 
-use ruma::api::ruma_api;
-use ruma::identifiers::UserId;
+use ruma::{api::ruma_api, identifiers::UserId};
 
 ruma_api! {
     metadata: {
@@ -44,11 +43,7 @@ ruma_api! {
 impl<'a> Request<'a> {
     /// Creates an `Request` with the given user ID.
     pub fn new(user_id: &'a UserId) -> Self {
-        Self {
-            user_id,
-            expiration_ts: None,
-            enable_renewal_emails: true,
-        }
+        Self { user_id, expiration_ts: None, enable_renewal_emails: true }
     }
 }
 
