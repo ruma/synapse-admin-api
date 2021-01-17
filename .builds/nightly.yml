@@ -1,0 +1,23 @@
+image: archlinux
+packages:
+  - rustup
+sources:
+  - https://github.com/ruma/synapse-admin-api
+tasks:
+  - rustup: |
+      rustup toolchain install nightly --profile minimal -c rustfmt,clippy
+      rustup default nightly
+  - check: |
+      cd synapse-admin-api
+
+      # We don't want the build to stop on individual failure of independent
+      # tools, so capture tool exit codes and set the task exit code manually
+      set +e
+
+      cargo fmt -- --check
+      fmt_exit=$?
+
+      cargo clippy --quiet -- -D warnings
+      clippy_exit=$?
+
+      exit $(( $fmt_exit || $clippy_exit ))

@@ -1,0 +1,13 @@
+image: archlinux
+packages:
+  - rustup
+sources:
+  - https://github.com/ruma/ruma
+tasks:
+  - rustup: |
+      # We specify --profile minimal because we'd otherwise download docs
+      rustup toolchain install stable --profile minimal
+      rustup default stable
+  - test: |
+      cd synapse-admin-api
+      cargo test
