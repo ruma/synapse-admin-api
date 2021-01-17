@@ -12,7 +12,7 @@ ruma_api! {
         name: "set_account_validity",
         path: "/_synapse/admin/v1/account_validity/validity",
         rate_limited: false,
-        authentication: None, // AccessToken?
+        authentication: AccessToken,
     }
 
     request: {
