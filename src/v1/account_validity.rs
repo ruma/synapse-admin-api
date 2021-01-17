@@ -22,7 +22,7 @@ ruma_api! {
         /// This is an optional parameter, it overrides the expiration date,
         /// which otherwise defaults to now + validity period configured at the server
         #[serde(
-            with = "ruma_serde::time::opt_ms_since_unix_epoch",
+            with = "ruma::serde::time::opt_ms_since_unix_epoch",
             default,
             skip_serializing_if = "Option::is_none"
         )]
@@ -30,7 +30,7 @@ ruma_api! {
 
         /// This is an optional parameter, it enables/disables sending renewal emails to the user.
         /// Defaults to true.
-        #[serde(default = "ruma_serde::default_true", skip_serializing_if = "ruma_serde::is_true")]
+        #[serde(default = "ruma::serde::default_true", skip_serializing_if = "ruma_serde::is_true")]
         pub enable_renewal_emails: bool,
     }
 
