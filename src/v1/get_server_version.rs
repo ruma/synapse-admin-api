@@ -34,9 +34,6 @@ impl Request {
 impl Response {
     /// Creates a `Response` with the given Synapse and Python versions.
     pub fn new(server_version: String, python_version: String) -> Self {
-        Self {
-            server_version,
-            python_version,
-        }
+        Self { server_version, python_version }
     }
 }
