@@ -1,6 +1,5 @@
 //! [GET /_synapse/admin/v1/users/:user_id/admin](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/user_admin_api.rst#get-whether-a-user-is-a-server-administrator-or-not)
-use ruma::api::ruma_api;
-use ruma::identifiers::UserId;
+use ruma::{api::ruma_api, identifiers::UserId};
 
 ruma_api! {
     metadata: {
@@ -30,5 +29,12 @@ impl<'a> Request<'a> {
     /// Creates an `Request` with the given user ID.
     pub fn new(user_id: &'a UserId) -> Self {
         Self { user_id }
+    }
+}
+
+impl Response {
+    /// Creates a `Response` with the given Synapse and Python versions.
+    pub fn new(admin: bool) -> Self {
+        Self { admin }
     }
 }
