@@ -2,11 +2,16 @@ use std::time::SystemTime;
 
 use serde::{Serialize, Deserialize};
 
-use ruma::api::ruma_api;
-use ruma::identifiers::UserId;
-use ruma::api::client::r0::contact::get_contacts::ThirdPartyIdentifier;
-
-use ruma::api::client;
+use ruma::{
+    api::{
+        client::{
+            self,
+            r0::contact::get_contacts::ThirdPartyIdentifier,
+        },
+        ruma_api,
+    },
+    identifiers::UserId,
+};
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct UserInformation {
@@ -23,15 +28,15 @@ pub struct UserInformation {
     pub admin: u64,
 
     // todo: doc but I do not know what this is
-    #[serde(skip_serializing_if="Option::is_none")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub consent_version: Option<String>,
 
     // todo: doc but I do not know what this is
-    #[serde(skip_serializing_if="Option::is_none")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub consent_server_notice_sent: Option<bool>,
 
     // todo: doc but I do not know what this is
-    #[serde(skip_serializing_if="Option::is_none")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub appservice_id: Option<String>,
 
     /// creation date for the account
@@ -40,7 +45,7 @@ pub struct UserInformation {
     pub creation_ts: Option<SystemTime>,
 
     // todo: doc but I do not know what this is
-    #[serde(skip_serializing_if="Option::is_none")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub user_type: Option<String>,
 
     /// Is the account deactivated
@@ -59,14 +64,6 @@ pub struct UserInformation {
     pub threepids: Vec<ThirdPartyIdentifier>,
 }
 
-impl Default for UserInformation {
-    fn default() -> Self {
-        UserInformation{
-            creation_ts: Some(SystemTime::now()),
-            ..Default::default()
-        }
-    }
-}
 
 
 pub mod query_user {
@@ -89,13 +86,15 @@ pub mod query_user {
             pub user_id: &'a UserId,
         }
 
-        #[derive(Default)]
         response: {
             /// Information about the user.
             #[ruma_api(body)]
             pub info: UserInformation,
         }
 
+        // temporary workaround until
+        // https://github.com/matrix-org/matrix-rust-sdk/issues/125
+        // is solved
         error: client::Error
 
     }
@@ -109,8 +108,8 @@ pub mod query_user {
 
     impl Response {
         /// Creates a new `Response` with all parameters defaulted.
-        pub fn new() -> Self {
-            Default::default()
+        pub fn new(info: UserInformation) -> Self {
+            Self { info }
         }
     }
 }
@@ -137,43 +136,44 @@ pub mod create_modify_user {
 
             /// This is an optional parameter. Add this parameter to create an account or set this
             /// password as new one for an existing account.
-            pub password: Option<String>,
+            pub password: Option<&'a str>,
 
             // NOTE: Server explodes if attributes are not omitted but specified as null, like the default
             // Serde case.
 
             /// defaults to user_id, or the current value if user already exists
             /// Some("") is treated as setting it to null.
-            #[serde(skip_serializing_if="Option::is_none")]
+            #[serde(skip_serializing_if = "Option::is_none")]
             pub displayname: Option<String>,
 
             /// defaults to empty, or the current value if user already exists
-            #[serde(skip_serializing_if="Option::is_none")]
+            #[serde(skip_serializing_if = "Option::is_none")]
             pub threepids: Option<Vec<super::ThirdPartyIdentifier>>,
 
             /// The user's avatar URL, if set.
-            #[serde(skip_serializing_if="Option::is_none")]
+            #[serde(skip_serializing_if = "Option::is_none")]
             pub avatar_url: Option<String>,
 
             /// Should the user be a server admin
             /// defaults to false, or the current value if user already exists
-            #[serde(skip_serializing_if="Option::is_none")]
+            #[serde(skip_serializing_if = "Option::is_none")]
             pub admin: Option<bool>,
 
             /// Should the user be deactivated
             /// defaults to false, or the current value if user already exists
-            #[serde(skip_serializing_if="Option::is_none")]
+            #[serde(skip_serializing_if = "Option::is_none")]
             pub deactivated: Option<bool>,
-
         }
 
-        #[derive(Default)]
         response: {
             /// Information about the user.
             #[ruma_api(body)]
             pub info: UserInformation,
         }
 
+        // temporary workaround until
+        // https://github.com/matrix-org/matrix-rust-sdk/issues/125
+        // is solved
         error: client::Error
 
         // todo following to does are from synadminctl
@@ -191,7 +191,7 @@ pub mod create_modify_user {
     }
 
     impl<'a> Request<'a> {
-        pub fn new(user_id: &'a UserId, password: Option<String>, ) -> Self {
+        pub fn new(user_id: &'a UserId, password: Option<&'a str>, ) -> Self {
             Self {
                 user_id,
                 password,
@@ -206,8 +206,8 @@ pub mod create_modify_user {
 
     impl Response {
         /// Creates a new `Response` with all parameters defaulted.
-        pub fn new() -> Self {
-            Default::default()
+        pub fn new(info: UserInformation) -> Self {
+            Self { info }
         }
     }
 }
