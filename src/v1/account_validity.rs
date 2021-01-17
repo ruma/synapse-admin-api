@@ -29,8 +29,8 @@ ruma_api! {
 
         /// This is an optional parameter, it enables/disables sending renewal emails to the user.
         /// Defaults to true.
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub enable_renewal_emails: Option<bool>,
+        serde(deserialize_with = "ruma::serde::default_true")
+        pub enable_renewal_emails: bool,
     }
 
     response: {
