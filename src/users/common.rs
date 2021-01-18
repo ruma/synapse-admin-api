@@ -1,5 +1,6 @@
 //! Common parts for the user endpoints.
 
+use crate::serde::boolean_as_uint;
 use ruma::api::client::r0::contact::get_contacts::ThirdPartyIdentifier;
 use serde::{Deserialize, Serialize};
 use std::time::SystemTime;
@@ -14,10 +15,12 @@ pub struct UserDetails {
     pub password_hash: String,
 
     /// Is the account a guest
-    pub is_guest: u64,
+    #[serde(with = "boolean_as_uint")]
+    pub is_guest: bool,
 
     /// Is the user a server admin
-    pub admin: u64,
+    #[serde(with = "boolean_as_uint")]
+    pub admin: bool,
 
     /// todo: doc but I do not know what this is
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -41,7 +44,8 @@ pub struct UserDetails {
     pub user_type: Option<String>,
 
     /// Is the account deactivated
-    pub deactivated: u64,
+    #[serde(with = "boolean_as_uint")]
+    pub deactivated: bool,
 
     /// The user's display name, if set.
     pub displayname: String,
