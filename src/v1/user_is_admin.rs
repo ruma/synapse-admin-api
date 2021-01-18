@@ -12,13 +12,13 @@ ruma_api! {
     }
 
     request: {
-        /// user to check.
+        /// User to check.
         #[ruma_api(path)]
         pub user_id: &'a UserId,
     }
 
     response: {
-        /// Weather the requested user ID is an admin.
+        /// Whether the requested user ID is an admin.
         pub admin: bool,
     }
 
@@ -32,7 +32,7 @@ impl<'a> Request<'a> {
 }
 
 impl Response {
-    /// Creates a `Response` with the given ….
+    /// Creates a `Response` with the given admin flag.
     pub fn new(admin: bool) -> Self {
         Self { admin }
     }
