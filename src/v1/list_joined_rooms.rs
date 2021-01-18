@@ -1,8 +1,7 @@
 //! [GET /_synapse/admin/v1/users/:user_id/joined_rooms](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/user_admin_api.rst#list-room-memberships-of-an-user)
 
 use js_int::UInt;
-
-use ruma::{api::ruma_api, identifiers::UserId};
+use ruma::{api::ruma_api, RoomId, UserId};
 
 ruma_api! {
     metadata: {
@@ -22,7 +21,7 @@ ruma_api! {
 
     response: {
         /// List all joined roo IDs.
-        pub joined_rooms: Vec<ruma::RoomId>,
+        pub joined_rooms: Vec<RoomId>,
         /// Amount of joined of rooms.
         pub total: UInt,
     }
@@ -38,7 +37,7 @@ impl<'a> Request<'a> {
 
 impl Response {
     /// Creates a `Response` with the given joined rooms and the total amount of them.
-    pub fn new(joined_rooms: Vec<ruma::RoomId>, total: UInt) -> Self {
+    pub fn new(joined_rooms: Vec<RoomId>, total: UInt) -> Self {
         Self { joined_rooms, total }
     }
 }
