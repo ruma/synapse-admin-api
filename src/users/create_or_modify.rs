@@ -1,121 +1,18 @@
-use std::time::SystemTime;
-
-use serde::{Serialize, Deserialize};
+//! Endpoint to create or modify a user account.
 
 use ruma::{
-    api::{
-        client::{
-            self,
-            r0::contact::get_contacts::ThirdPartyIdentifier,
+        api::{
+            client::{
+                Error,
+                r0::contact::get_contacts::ThirdPartyIdentifier,
+            },
+            ruma_api,
         },
-        ruma_api,
-    },
-    identifiers::UserId,
+        UserId,
 };
+pub use super::common::UserDetails;
 
-#[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct UserInformation {
-    /// The user's name.
-    pub name: String,
-
-    /// The password hash of th account
-    pub password_hash: String,
-
-    /// Is the account a guest
-    pub is_guest: u64,
-
-    /// Is the user a server admin
-    pub admin: u64,
-
-    // todo: doc but I do not know what this is
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub consent_version: Option<String>,
-
-    // todo: doc but I do not know what this is
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub consent_server_notice_sent: Option<bool>,
-
-    // todo: doc but I do not know what this is
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub appservice_id: Option<String>,
-
-    /// creation date for the account
-    // todo: how to get rid of this option?
-    #[serde(with = "ruma::serde::time::opt_s_since_unix_epoch")]
-    pub creation_ts: Option<SystemTime>,
-
-    // todo: doc but I do not know what this is
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub user_type: Option<String>,
-
-    /// Is the account deactivated
-    pub deactivated: u64,
-
-    /// The user's display name, if set.
-    pub displayname: String,
-
-    /// The user's avatar URL, if set.
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub avatar_url: Option<String>,
-
-    /// A list of third party identifiers the homeserver has associated with the user's
-    /// account.
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub threepids: Vec<ThirdPartyIdentifier>,
-}
-
-
-
-pub mod query_user {
-    //! [GET /_synapse/admin/v2/users/:user_id](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/user_admin_api.rst#query-user-account)
-    use super::*;
-
-    ruma_api! {
-        metadata: {
-            description: "Get information about a specific user account.",
-            method: GET,
-            name: "query_user_account",
-            path: "/_synapse/admin/v2/users/:user_id",
-            rate_limited: false,
-            authentication: AccessToken,
-        }
-
-        request: {
-            /// user ID
-            #[ruma_api(path)]
-            pub user_id: &'a UserId,
-        }
-
-        response: {
-            /// Information about the user.
-            #[ruma_api(body)]
-            pub info: UserInformation,
-        }
-
-        // temporary workaround until
-        // https://github.com/matrix-org/matrix-rust-sdk/issues/125
-        // is solved
-        error: client::Error
-
-    }
-
-    impl<'a> Request<'a> {
-        /// Creates an `Request` with the given user ID.
-        pub fn new(user_id: &'a UserId) -> Self {
-            Self { user_id }
-        }
-    }
-
-    impl Response {
-        /// Creates a new `Response` with all parameters defaulted.
-        pub fn new(info: UserInformation) -> Self {
-            Self { info }
-        }
-    }
-}
-
-
-pub mod create_modify_user {
+pub mod v2 {
     //! [GET /_synapse/admin/v2/users/:user_id](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/user_admin_api.rst#create-or-modify-account)
     use super::*;
 
@@ -166,15 +63,15 @@ pub mod create_modify_user {
         }
 
         response: {
-            /// Information about the user.
+            /// Details about the user.
             #[ruma_api(body)]
-            pub info: UserInformation,
+            pub details: UserDetails,
         }
 
         // temporary workaround until
         // https://github.com/matrix-org/matrix-rust-sdk/issues/125
         // is solved
-        error: client::Error
+        error: Error
 
         // todo following to does are from synadminctl
         // TODO: returns 200 if account-exist-and-was-updated,
@@ -191,6 +88,7 @@ pub mod create_modify_user {
     }
 
     impl<'a> Request<'a> {
+        /// Creates a Request with the user ID and the optional password.
         pub fn new(user_id: &'a UserId, password: Option<&'a str>, ) -> Self {
             Self {
                 user_id,
@@ -205,10 +103,9 @@ pub mod create_modify_user {
     }
 
     impl Response {
-        /// Creates a new `Response` with all parameters defaulted.
-        pub fn new(info: UserInformation) -> Self {
-            Self { info }
+        /// Creates a new `Response` with the user details.
+        pub fn new(details: UserDetails) -> Self {
+            Self { details }
         }
     }
 }
-
