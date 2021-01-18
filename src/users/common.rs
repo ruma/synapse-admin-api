@@ -1,7 +1,7 @@
 //! Common parts for the user endpoints.
 
 use ruma::api::client::r0::contact::get_contacts::ThirdPartyIdentifier;
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 use std::time::SystemTime;
 
 /// User details

@@ -1,16 +1,13 @@
 //! Endpoint to create or modify a user account.
 
-use ruma::{
-        api::{
-            client::{
-                Error,
-                r0::contact::get_contacts::ThirdPartyIdentifier,
-            },
-            ruma_api,
-        },
-        UserId,
-};
 pub use super::common::UserDetails;
+use ruma::{
+    api::{
+        client::{r0::contact::get_contacts::ThirdPartyIdentifier, Error},
+        ruma_api,
+    },
+    UserId,
+};
 
 pub mod v2 {
     //! [GET /_synapse/admin/v2/users/:user_id](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/user_admin_api.rst#create-or-modify-account)
@@ -89,7 +86,7 @@ pub mod v2 {
 
     impl<'a> Request<'a> {
         /// Creates a Request with the user ID and the optional password.
-        pub fn new(user_id: &'a UserId, password: Option<&'a str>, ) -> Self {
+        pub fn new(user_id: &'a UserId, password: Option<&'a str>) -> Self {
             Self {
                 user_id,
                 password,
