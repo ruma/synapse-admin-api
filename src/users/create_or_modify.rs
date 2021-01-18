@@ -1,6 +1,6 @@
 //! Endpoint to create or modify a user account.
 
-pub use super::common::UserDetails;
+
 use ruma::{
     api::{
         client::{r0::contact::get_contacts::ThirdPartyIdentifier, Error},
@@ -8,6 +8,7 @@ use ruma::{
     },
     UserId,
 };
+pub use super::common::UserDetails;
 
 pub mod v2 {
     //! [GET /_synapse/admin/v2/users/:user_id](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/user_admin_api.rst#create-or-modify-account)
