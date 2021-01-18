@@ -3,6 +3,8 @@
 use ruma::{api::ruma_api, UserId};
 use std::time::SystemTime;
 
+
+
 ruma_api! {
     metadata: {
         description: "Extend the account validity.",
