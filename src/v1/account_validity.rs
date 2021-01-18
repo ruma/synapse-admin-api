@@ -2,7 +2,7 @@
 
 use std::time::SystemTime;
 
-use ruma::{api::ruma_api, identifiers::UserId};
+use ruma::{api::ruma_api, UserId};
 
 ruma_api! {
     metadata: {

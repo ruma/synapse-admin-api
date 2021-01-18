@@ -1,6 +1,6 @@
 //! [POST /_synapse/admin/v1/reset_password/:user_id](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/user_admin_api.rst#reset-password)
 
-use ruma::{api::ruma_api, identifiers::UserId};
+use ruma::{api::ruma_api, UserId};
 
 ruma_api! {
     metadata: {

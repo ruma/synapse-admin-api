@@ -1,5 +1,6 @@
 //! [GET /_synapse/admin/v1/users/:user_id/admin](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/user_admin_api.rst#get-whether-a-user-is-a-server-administrator-or-not)
-use ruma::{api::ruma_api, identifiers::UserId};
+
+use ruma::{api::ruma_api, UserId};
 
 ruma_api! {
     metadata: {
