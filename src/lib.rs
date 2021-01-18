@@ -4,4 +4,5 @@
 //! [api]: https://github.com/matrix-org/synapse/tree/master/docs/admin_api
 #![warn(missing_debug_implementations, missing_docs)]
 
+mod serde;
 pub mod v1;
