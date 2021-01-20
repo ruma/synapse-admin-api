@@ -1,7 +1,8 @@
 //! [GET /_synapse/admin/v1/account_validity/validity](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/account_validity.rst)
 
-use ruma::{api::ruma_api, UserId};
 use std::time::SystemTime;
+
+use ruma::{api::ruma_api, UserId};
 
 ruma_api! {
     metadata: {

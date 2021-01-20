@@ -32,7 +32,6 @@ ruma_api! {
     // https://github.com/matrix-org/matrix-rust-sdk/issues/125
     // is solved
     error: Error
-
 }
 
 impl<'a> Request<'a> {

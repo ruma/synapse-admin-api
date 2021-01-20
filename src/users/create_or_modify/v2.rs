@@ -38,7 +38,7 @@ ruma_api! {
 
         /// defaults to empty, or the current value if user already exists
         #[serde(skip_serializing_if = "Option::is_none")]
-        pub threepids: Option<Vec<super::ThirdPartyIdentifier>>,
+        pub threepids: Option<Vec<ThirdPartyIdentifier>>,
 
         /// The user's avatar URL, if set.
         #[serde(skip_serializing_if = "Option::is_none")]
