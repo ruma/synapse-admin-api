@@ -1,12 +1,10 @@
 //! Endpoint to get details for a user account.
 
-
+pub use super::common::UserDetails;
 use ruma::{
     api::{client::Error, ruma_api},
     UserId,
 };
-pub use super::common::UserDetails;
-
 
 pub mod v2 {
     //! [GET /_synapse/admin/v2/users/:user_id](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/user_admin_api.rst#query-user-account)
