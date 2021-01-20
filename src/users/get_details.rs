@@ -1,6 +1,6 @@
 //! Endpoint to get details for a user account.
 
-pub use super::common::UserDetails;
+pub use super::UserDetails;
 use ruma::{
     api::{client::Error, ruma_api},
     UserId,

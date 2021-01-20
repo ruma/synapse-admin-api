@@ -1,6 +1,6 @@
 //! Endpoint to create or modify a user account.
 
-pub use super::common::UserDetails;
+pub use super::UserDetails;
 use ruma::{
     api::{
         client::{r0::contact::get_contacts::ThirdPartyIdentifier, Error},
