@@ -11,7 +11,7 @@ repository = "https://github.com/ruma/synapse-admin-api"
 edition = "2018"
 
 [dependencies]
-ruma = { version = "0.0.2", features = ["ruma-api"] }
+ruma = { version = "0.0.2", features = ["ruma-api", "client-api"] }
 #assign = "1.1.1"
 js_int = { version = "0.2.0", features = ["serde"] }
 serde = { version = "1.0.118", features = ["derive"] }

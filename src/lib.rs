@@ -5,4 +5,5 @@
 #![warn(missing_debug_implementations, missing_docs)]
 
 mod serde;
+pub mod users;
 pub mod v1;
