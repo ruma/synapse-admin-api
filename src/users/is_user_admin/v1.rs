@@ -6,7 +6,7 @@ ruma_api! {
     metadata: {
         description: "is admin endpoint",
         method: GET,
-        name: "user_is_admin",
+        name: "is_user_admin_v1",
         path: "/_synapse/admin/v1/users/:user_id/admin",
         rate_limited: false,
         authentication: AccessToken,

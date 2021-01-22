@@ -1,13 +1,12 @@
 //! [GET /_synapse/admin/v1/users/:user_id/joined_rooms](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/user_admin_api.rst#list-room-memberships-of-an-user)
 
-use js_int::UInt;
-use ruma::{api::ruma_api, RoomId, UserId};
+use ruma::{api::ruma_api, RoomId, UInt, UserId};
 
 ruma_api! {
     metadata: {
         description: "list room memberships of a user",
         method: GET,
-        name: "query_user",
+        name: "list_joined_rooms_v1",
         path: "/_synapse/admin/v1/users/:user_id/joined_rooms",
         rate_limited: false,
         authentication: AccessToken,

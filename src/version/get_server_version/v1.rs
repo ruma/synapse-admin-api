@@ -6,7 +6,7 @@ ruma_api! {
     metadata: {
         description: "Get the Synapse and Python version of this homeserver.",
         method: GET,
-        name: "get_server_version",
+        name: "get_server_version_v1",
         path: "/_synapse/admin/v1/server_version",
         rate_limited: false,
         authentication: None, // AccessToken?

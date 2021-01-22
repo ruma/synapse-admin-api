@@ -4,7 +4,9 @@
 //! [api]: https://github.com/matrix-org/synapse/tree/master/docs/admin_api
 #![warn(missing_debug_implementations, missing_docs)]
 
+pub mod account_validity;
 pub mod rooms;
-mod serde;
 pub mod users;
-pub mod v1;
+pub mod version;
+
+mod serde;

@@ -1,14 +1,85 @@
 //! [GET /_synapse/admin/v1/rooms](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/rooms.md#list-room-api)
-use js_int::UInt;
 use ruma::{
     api::ruma_api,
     events::room::{
         guest_access::GuestAccess, history_visibility::HistoryVisibility, join_rules::JoinRule,
     },
     serde::StringEnum,
-    RoomAliasId, RoomId, UserId,
+    RoomAliasId, RoomId, UInt, UserId,
 };
 use serde::{Deserialize, Serialize};
+
+ruma_api! {
+    metadata: {
+        description: "list rooms endpoint",
+        method: GET,
+        name: "list_rooms_v1",
+        path: "/_synapse/admin/v1/rooms",
+        rate_limited: false,
+        authentication: AccessToken,
+    }
+
+    #[derive(Default)]
+    request: {
+        /// Offset in the returned list. Defaults to 0.
+        #[serde(skip_serializing_if="Option::is_none")]
+        #[ruma_api(query)]
+        pub from: Option<UInt>,
+
+        /// Maximum amount of rooms to return. Defaults to 100.
+        #[serde(skip_serializing_if="Option::is_none")]
+        #[ruma_api(query)]
+        pub limit: Option<UInt>,
+
+        /// Sort order of the response.
+        #[serde(skip_serializing_if="Option::is_none")]
+        #[ruma_api(query)]
+        pub order_by: Option<RoomSortOrder>,
+
+        /// Sort direction of the response.
+        #[serde(skip_serializing_if="Option::is_none")]
+        #[ruma_api(query)]
+        pub dir: Option<SortDirection>,
+
+        /// Filter rooms by their room name. Search term can be contained in any part of the room name.
+        /// Defaults to no filtering.
+        #[serde(skip_serializing_if="Option::is_none")]
+        #[ruma_api(query)]
+        pub search_term: Option<String>,
+    }
+
+    #[derive(Default)]
+    response: {
+        /// List all RoomDetails.
+        pub rooms: Vec<RoomDetails>,
+
+        /// Offset.
+        pub offset: UInt,
+
+        /// Total amount of rooms.
+        pub total_rooms: UInt,
+
+        /// Token to receive the next RoomDetails batch.
+        pub next_batch: Option<UInt>,
+
+        /// Token to receive the previous RoomDetails batch.
+        pub prev_batch: Option<UInt>,
+    }
+}
+
+impl Request {
+    /// Creates an empty `Request`.
+    pub fn new() -> Self {
+        Default::default()
+    }
+}
+
+impl Response {
+    /// Creates an empty `Response`.
+    pub fn new() -> Self {
+        Default::default()
+    }
+}
 
 /// Enum to define the sorting method of rooms.
 #[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, StringEnum)]
@@ -116,76 +187,4 @@ pub struct RoomDetails {
 
     /// State events of the room.
     pub state_events: UInt,
-}
-
-ruma_api! {
-    metadata: {
-        description: "list rooms endpoint",
-        method: GET,
-        name: "list _rooms",
-        path: "/_synapse/admin/v1/rooms",
-        rate_limited: false,
-        authentication: AccessToken,
-    }
-
-    #[derive(Default)]
-    request: {
-        /// Offset in the returned list. Defaults to 0.
-        #[serde(skip_serializing_if="Option::is_none")]
-        #[ruma_api(query)]
-        pub from: Option<UInt>,
-
-        /// Maximum amount of rooms to return. Defaults to 100.
-        #[serde(skip_serializing_if="Option::is_none")]
-        #[ruma_api(query)]
-        pub limit: Option<UInt>,
-
-        /// Sort order of the response.
-        #[serde(skip_serializing_if="Option::is_none")]
-        #[ruma_api(query)]
-        pub order_by: Option<RoomSortOrder>,
-
-        /// Sort direction of the response.
-        #[serde(skip_serializing_if="Option::is_none")]
-        #[ruma_api(query)]
-        pub dir: Option<SortDirection>,
-
-        /// Filter rooms by their room name. Search term can be contained in any part of the room name.
-        /// Defaults to no filtering.
-        #[serde(skip_serializing_if="Option::is_none")]
-        #[ruma_api(query)]
-        pub search_term: Option<String>,
-    }
-
-    #[derive(Default)]
-    response: {
-        /// List all RoomDetails.
-        pub rooms: Vec<RoomDetails>,
-
-        /// Offset.
-        pub offset: UInt,
-
-        /// Total amount of rooms.
-        pub total_rooms: UInt,
-
-        /// Token to receive the next RoomDetails batch.
-        pub next_batch: Option<UInt>,
-
-        /// Token to receive the previous RoomDetails batch.
-        pub prev_batch: Option<UInt>,
-    }
-}
-
-impl Request {
-    /// Creates an empty `Request`.
-    pub fn new() -> Self {
-        Default::default()
-    }
-}
-
-impl Response {
-    /// Creates an empty `Response`.
-    pub fn new() -> Self {
-        Default::default()
-    }
 }

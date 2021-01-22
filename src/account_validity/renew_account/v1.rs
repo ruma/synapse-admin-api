@@ -8,7 +8,7 @@ ruma_api! {
     metadata: {
         description: "Extend the account validity.",
         method: POST,
-        name: "set_account_validity",
+        name: "renew_account_v1",
         path: "/_synapse/admin/v1/account_validity/validity",
         rate_limited: false,
         authentication: AccessToken,

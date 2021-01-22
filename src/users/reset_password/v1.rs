@@ -6,7 +6,7 @@ ruma_api! {
     metadata: {
         description: "password reset endpoint",
         method: POST,
-        name: "reset_password",
+        name: "reset_password_v1",
         path: "/_synapse/admin/v1/reset_password/:user_id",
         rate_limited: false,
         authentication: AccessToken,

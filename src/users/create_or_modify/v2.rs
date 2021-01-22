@@ -13,7 +13,7 @@ ruma_api! {
     metadata: {
         description: "create or modify account endpoint",
         method: PUT,
-        name: "create_modify_account",
+        name: "create_modify_account_v2",
         path: "/_synapse/admin/v2/users/:user_id",
         rate_limited: false,
         authentication: AccessToken,

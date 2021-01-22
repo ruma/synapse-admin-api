@@ -1,3 +1,3 @@
 //! Endpoints in the `/_synapse/admin/v<x>/rooms/` scope.
 
-pub mod list;
+pub mod list_rooms;
