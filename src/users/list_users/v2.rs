@@ -76,6 +76,7 @@ impl Response {
     }
 }
 
+/// A minor set of user details.
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct UserMinorDetails {
     /// The user's name.
