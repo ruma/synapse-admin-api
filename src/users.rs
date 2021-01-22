@@ -3,6 +3,7 @@
 pub mod create_or_modify;
 pub mod get_details;
 pub mod is_user_admin;
+pub mod list;
 pub mod list_joined_rooms;
 pub mod reset_password;
 
