@@ -22,28 +22,28 @@ ruma_api! {
     #[derive(Default)]
     request: {
         /// Offset in the returned list. Defaults to 0.
-        #[serde(skip_serializing_if="Option::is_none")]
+        #[serde(skip_serializing_if = "Option::is_none")]
         #[ruma_api(query)]
         pub from: Option<UInt>,
 
         /// Maximum amount of rooms to return. Defaults to 100.
-        #[serde(skip_serializing_if="Option::is_none")]
+        #[serde(skip_serializing_if = "Option::is_none")]
         #[ruma_api(query)]
         pub limit: Option<UInt>,
 
         /// Sort order of the response.
-        #[serde(skip_serializing_if="Option::is_none")]
+        #[serde(skip_serializing_if = "Option::is_none")]
         #[ruma_api(query)]
         pub order_by: Option<RoomSortOrder>,
 
         /// Sort direction of the response.
-        #[serde(skip_serializing_if="Option::is_none")]
+        #[serde(skip_serializing_if = "Option::is_none")]
         #[ruma_api(query)]
         pub dir: Option<SortDirection>,
 
         /// Filter rooms by their room name. Search term can be contained in any part of the room name.
         /// Defaults to no filtering.
-        #[serde(skip_serializing_if="Option::is_none")]
+        #[serde(skip_serializing_if = "Option::is_none")]
         #[ruma_api(query)]
         pub search_term: Option<String>,
     }
