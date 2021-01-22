@@ -1,7 +1,7 @@
 //! [GET /_synapse/admin/v2/users/:user_id](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/user_admin_api.rst#list-accountshttps://github.com/matrix-org/synapse/blob/master/docs/admin_api/user_admin_api.rst#query-user-account)
 
 use crate::serde::boolean_as_uint;
-use ruma::{api::ruma_api, UInt};
+use ruma::{api::ruma_api, UInt, UserId};
 use serde::{Deserialize, Serialize};
 
 ruma_api! {
@@ -71,7 +71,7 @@ ruma_api! {
     }
 }
 
-impl Request {
+impl<'a> Request<'a> {
     /// Creates an empty `Request`.
     pub fn new() -> Self {
         Default::default()
