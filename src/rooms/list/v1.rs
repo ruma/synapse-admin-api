@@ -174,7 +174,6 @@ ruma_api! {
         /// Token to receive the previous RoomDetails batch.
         pub prev_batch: Option<UInt>,
     }
-
 }
 
 impl Request {
