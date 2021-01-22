@@ -4,6 +4,7 @@ pub mod create_or_modify;
 pub mod get_details;
 pub mod is_user_admin;
 pub mod list_joined_rooms;
+pub mod list_users;
 pub mod reset_password;
 
 use crate::serde::boolean_as_uint;
