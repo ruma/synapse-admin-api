@@ -19,7 +19,7 @@ ruma_api! {
 
         /// Flag wether to erase the account.
         #[serde(default = "ruma::serde::default_false", skip_serializing_if = "ruma::serde::is_false")]
-        pub erase: bool
+        pub erase: bool,
     }
 
     #[derive(Default)]
@@ -27,7 +27,7 @@ ruma_api! {
 }
 
 impl<'a> Request<'a> {
-    /// Creates an `Request` with the given user ID.
+    /// Creates a `Request` with the given user ID.
     pub fn new(user_id: &'a UserId) -> Self {
         Self { user_id }
     }
