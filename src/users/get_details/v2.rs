@@ -1,10 +1,7 @@
 //! [GET /_synapse/admin/v2/users/:user_id](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/user_admin_api.rst#query-user-account)
 
 pub use crate::users::UserDetails;
-use ruma::{
-    api::{client::Error, ruma_api},
-    UserId,
-};
+use ruma::{api::ruma_api, UserId};
 
 ruma_api! {
     metadata: {
@@ -27,11 +24,6 @@ ruma_api! {
         #[ruma_api(body)]
         pub details: UserDetails,
     }
-
-    // temporary workaround until
-    // https://github.com/matrix-org/matrix-rust-sdk/issues/125
-    // is solved
-    error: Error
 }
 
 impl<'a> Request<'a> {

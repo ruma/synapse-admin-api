@@ -8,9 +8,8 @@ pub mod list_users;
 pub mod reset_password;
 
 use crate::serde::boolean_as_uint;
-use ruma::api::client::r0::contact::get_contacts::ThirdPartyIdentifier;
+use ruma::{api::client::r0::contact::get_contacts::ThirdPartyIdentifier, SecondsSinceUnixEpoch};
 use serde::{Deserialize, Serialize};
-use std::time::SystemTime;
 
 /// User details
 #[derive(Serialize, Deserialize, Clone, Debug)]
@@ -43,8 +42,7 @@ pub struct UserDetails {
 
     /// creation date for the account
     // todo: how to get rid of this option?
-    #[serde(with = "ruma::serde::time::opt_s_since_unix_epoch")]
-    pub creation_ts: Option<SystemTime>,
+    pub creation_ts: Option<SecondsSinceUnixEpoch>,
 
     /// todo: doc but I do not know what this is
     #[serde(skip_serializing_if = "Option::is_none")]

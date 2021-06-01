@@ -2,10 +2,7 @@
 
 pub use crate::users::UserDetails;
 use ruma::{
-    api::{
-        client::{r0::contact::get_contacts::ThirdPartyIdentifier, Error},
-        ruma_api,
-    },
+    api::{client::r0::contact::get_contacts::ThirdPartyIdentifier, ruma_api},
     UserId,
 };
 
@@ -60,11 +57,6 @@ ruma_api! {
         #[ruma_api(body)]
         pub details: UserDetails,
     }
-
-    // temporary workaround until
-    // https://github.com/matrix-org/matrix-rust-sdk/issues/125
-    // is solved
-    error: Error
 
     // todo following to does are from synadminctl
     // TODO: returns 200 if account-exist-and-was-updated,

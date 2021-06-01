@@ -1,8 +1,6 @@
 //! [GET /_synapse/admin/v1/account_validity/validity](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/account_validity.rst)
 
-use std::time::SystemTime;
-
-use ruma::{api::ruma_api, UserId};
+use ruma::{api::ruma_api, MilliSecondsSinceUnixEpoch, UserId};
 
 ruma_api! {
     metadata: {
@@ -20,12 +18,8 @@ ruma_api! {
 
         /// This is an optional parameter, it overrides the expiration date,
         /// which otherwise defaults to now + validity period configured at the server
-        #[serde(
-            with = "ruma::serde::time::opt_ms_since_unix_epoch",
-            default,
-            skip_serializing_if = "Option::is_none"
-        )]
-        pub expiration_ts: Option<SystemTime>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub expiration_ts: Option<MilliSecondsSinceUnixEpoch>,
 
         /// This is an optional parameter, it enables/disables sending renewal emails to the user.
         /// Defaults to true.
@@ -35,8 +29,7 @@ ruma_api! {
 
     response: {
         /// The new expiration date for this account, as a timestamp in milliseconds since epoch
-        #[serde(with = "ruma::serde::time::ms_since_unix_epoch")]
-        pub expiration_ts: SystemTime,
+        pub expiration_ts: MilliSecondsSinceUnixEpoch,
     }
 }
 
@@ -49,7 +42,7 @@ impl<'a> Request<'a> {
 
 impl Response {
     /// Creates a `Response` with the new expiration date for this account,
-    pub fn new(expiration_ts: SystemTime) -> Self {
+    pub fn new(expiration_ts: MilliSecondsSinceUnixEpoch) -> Self {
         Self { expiration_ts }
     }
 }
