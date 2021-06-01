@@ -8,7 +8,7 @@ pub mod list_users;
 pub mod reset_password;
 
 use crate::serde::boolean_as_uint;
-use ruma::{api::client::r0::contact::get_contacts::ThirdPartyIdentifier, SecondsSinceUnixEpoch};
+use ruma::{thirdparty::ThirdPartyIdentifier, SecondsSinceUnixEpoch};
 use serde::{Deserialize, Serialize};
 
 /// User details

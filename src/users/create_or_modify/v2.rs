@@ -1,10 +1,7 @@
 //! [GET /_synapse/admin/v2/users/:user_id](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/user_admin_api.rst#create-or-modify-account)
 
 pub use crate::users::UserDetails;
-use ruma::{
-    api::{client::r0::contact::get_contacts::ThirdPartyIdentifier, ruma_api},
-    UserId,
-};
+use ruma::{api::ruma_api, thirdparty::ThirdPartyIdentifier, UserId};
 
 ruma_api! {
     metadata: {
