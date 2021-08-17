@@ -16,7 +16,7 @@ server = []
 unstable-exhaustive-types = []
 
 [dependencies]
-ruma = { version = "0.2.0", features = ["api", "events"] }
+ruma = { version = "0.3.0", features = ["api", "events"] }
 serde = { version = "1.0.118", features = ["derive"] }
 
 [dev-dependencies]
