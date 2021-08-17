@@ -1,7 +1,6 @@
 [package]
 name = "synapse-admin-api"
-version = "0.0.0"
-#authors = []
+version = "0.1.0"
 categories = ["api-bindings", "web-programming"]
 description = "Types for the endpoints in the synapse admin API."
 homepage = "https://www.ruma.io/"
