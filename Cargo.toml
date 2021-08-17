@@ -10,14 +10,14 @@ license = "MIT"
 repository = "https://github.com/ruma/synapse-admin-api"
 edition = "2018"
 
+[features]
+client = []
+server = []
+unstable-exhaustive-types = []
+
 [dependencies]
 ruma = { version = "0.2.0", features = ["api", "events"] }
 serde = { version = "1.0.118", features = ["derive"] }
 
 [dev-dependencies]
 serde_json = "1.0.61"
-
-[features]
-client = []
-server = []
-unstable-exhaustive-types = []
