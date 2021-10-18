@@ -1,6 +1,6 @@
 [package]
 name = "synapse-admin-api"
-version = "0.1.0"
+version = "0.2.0"
 categories = ["api-bindings", "web-programming"]
 description = "Types for the endpoints in the synapse admin API."
 homepage = "https://www.ruma.io/"
@@ -15,7 +15,7 @@ server = []
 unstable-exhaustive-types = []
 
 [dependencies]
-ruma = { version = "0.3.0", features = ["api", "events"] }
+ruma = { version = "0.4.0", features = ["api", "events"] }
 serde = { version = "1.0.118", features = ["derive"] }
 
 [dev-dependencies]
