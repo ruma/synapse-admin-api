@@ -1,6 +1,6 @@
 //! [GET /_synapse/admin/v2/users/:user_id](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/user_admin_api.rst#create-or-modify-account)
 
-pub use crate::users::UserDetails;
+pub use crate::users::{ExternalId, UserDetails};
 use ruma::{api::ruma_api, thirdparty::ThirdPartyIdentifier, UserId};
 
 ruma_api! {
@@ -14,7 +14,7 @@ ruma_api! {
     }
 
     request: {
-        /// user ID for the account to renew
+        /// User ID for the account to renew
         #[ruma_api(path)]
         pub user_id: &'a UserId,
 
@@ -25,14 +25,18 @@ ruma_api! {
         // NOTE: Server explodes if attributes are not omitted but specified as null, like the default
         // Serde case.
 
-        /// defaults to user_id, or the current value if user already exists
+        /// Defaults to user_id, or the current value if user already exists
         /// Some("") is treated as setting it to null.
         #[serde(skip_serializing_if = "Option::is_none")]
         pub displayname: Option<String>,
 
-        /// defaults to empty, or the current value if user already exists
+        /// Defaults to empty, or the current value if user already exists
         #[serde(skip_serializing_if = "Option::is_none")]
         pub threepids: Option<Vec<ThirdPartyIdentifier>>,
+
+        /// Defaults to empty, or the current value if user already exists
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub external_ids: Option<Vec<ExternalId>>,
 
         /// The user's avatar URL, if set.
         #[serde(skip_serializing_if = "Option::is_none")]
@@ -77,6 +81,7 @@ impl<'a> Request<'a> {
             password,
             displayname: None,
             threepids: None,
+            external_ids: None,
             avatar_url: None,
             admin: None,
             deactivated: None,
