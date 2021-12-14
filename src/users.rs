@@ -17,8 +17,8 @@ pub struct UserDetails {
     /// The user's name.
     pub name: String,
 
-    /// The password hash of th account
-    pub password_hash: String,
+    /// The password hash of the account
+    pub password_hash: Option<String>,
 
     /// Is the account a guest
     #[serde(with = "boolean_as_uint")]
