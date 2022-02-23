@@ -7,7 +7,7 @@ ruma_api! {
         description: "Extend the account validity.",
         method: POST,
         name: "renew_account_v1",
-        path: "/_synapse/admin/v1/account_validity/validity",
+        unstable_path: "/_synapse/admin/v1/account_validity/validity",
         rate_limited: false,
         authentication: AccessToken,
     }

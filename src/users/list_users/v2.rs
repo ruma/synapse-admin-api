@@ -9,7 +9,7 @@ ruma_api! {
         description: "list users endpoint",
         method: GET,
         name: "list_users",
-        path: "/_synapse/admin/v2/users",
+        unstable_path: "/_synapse/admin/v2/users",
         rate_limited: false,
         authentication: AccessToken,
     }

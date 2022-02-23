@@ -7,7 +7,7 @@ ruma_api! {
         description: "Deactivate a user account",
         method: POST,
         name: "deactivate_account_v1",
-        path: "/_synapse/admin/v1/deactivate/:user_id",
+        unstable_path: "/_synapse/admin/v1/deactivate/:user_id",
         rate_limited: false,
         authentication: AccessToken,
     }

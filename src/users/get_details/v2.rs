@@ -8,7 +8,7 @@ ruma_api! {
         description: "Get information about a specific user account.",
         method: GET,
         name: "query_user_account_v2",
-        path: "/_synapse/admin/v2/users/:user_id",
+        unstable_path: "/_synapse/admin/v2/users/:user_id",
         rate_limited: false,
         authentication: AccessToken,
     }

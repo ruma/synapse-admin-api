@@ -14,7 +14,7 @@ ruma_api! {
         description: "list rooms endpoint",
         method: GET,
         name: "list_rooms_v1",
-        path: "/_synapse/admin/v1/rooms",
+        unstable_path: "/_synapse/admin/v1/rooms",
         rate_limited: false,
         authentication: AccessToken,
     }
@@ -123,8 +123,9 @@ pub enum RoomSortOrder {
 
     /// Sort by state events
     StateEvents,
+
     #[doc(hidden)]
-    _Custom(String),
+    _Custom(crate::PrivOwnedStr),
 }
 
 /// Enum to define the sort order direction.
@@ -139,20 +140,20 @@ pub enum SortDirection {
     Forward,
 
     #[doc(hidden)]
-    _Custom(String),
+    _Custom(crate::PrivOwnedStr),
 }
 
 /// Structure for all the room details.
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct RoomDetails {
     /// Room ID
-    pub room_id: RoomId,
+    pub room_id: Box<RoomId>,
 
     /// Room name
     pub name: Option<String>,
 
     /// Room alias ID
-    pub canonical_alias: Option<RoomAliasId>,
+    pub canonical_alias: Option<Box<RoomAliasId>>,
 
     /// Amount of joined members.
     pub joined_members: UInt,
@@ -165,7 +166,7 @@ pub struct RoomDetails {
 
     /// User ID of the room creator.
     #[serde(deserialize_with = "ruma::serde::empty_string_as_none")]
-    pub creator: Option<UserId>,
+    pub creator: Option<Box<UserId>>,
 
     /// Room encryption.
     pub encryption: Option<String>,

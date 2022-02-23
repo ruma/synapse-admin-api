@@ -7,7 +7,7 @@ ruma_api! {
         description: "list room memberships of a user",
         method: GET,
         name: "list_joined_rooms_v1",
-        path: "/_synapse/admin/v1/users/:user_id/joined_rooms",
+        unstable_path: "/_synapse/admin/v1/users/:user_id/joined_rooms",
         rate_limited: false,
         authentication: AccessToken,
     }
@@ -20,7 +20,8 @@ ruma_api! {
 
     response: {
         /// List all joined roo IDs.
-        pub joined_rooms: Vec<RoomId>,
+        pub joined_rooms: Vec<Box<RoomId>>,
+
         /// Amount of joined of rooms.
         pub total: UInt,
     }
@@ -36,7 +37,7 @@ impl<'a> Request<'a> {
 
 impl Response {
     /// Creates a `Response` with the given joined rooms and the total amount of them.
-    pub fn new(joined_rooms: Vec<RoomId>, total: UInt) -> Self {
+    pub fn new(joined_rooms: Vec<Box<RoomId>>, total: UInt) -> Self {
         Self { joined_rooms, total }
     }
 }

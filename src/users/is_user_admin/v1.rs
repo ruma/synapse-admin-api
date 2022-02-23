@@ -7,7 +7,7 @@ ruma_api! {
         description: "is admin endpoint",
         method: GET,
         name: "is_user_admin_v1",
-        path: "/_synapse/admin/v1/users/:user_id/admin",
+        unstable_path: "/_synapse/admin/v1/users/:user_id/admin",
         rate_limited: false,
         authentication: AccessToken,
     }
