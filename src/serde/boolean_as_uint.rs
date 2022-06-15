@@ -33,6 +33,9 @@ where
 
 #[cfg(test)]
 mod tests {
+    // Irrelevant for test code
+    #![allow(clippy::derive_partial_eq_without_eq)]
+
     use serde::{Deserialize, Serialize};
     use serde_json::json;
 
