@@ -5,7 +5,7 @@ use ruma::{
         guest_access::GuestAccess, history_visibility::HistoryVisibility, join_rules::JoinRule,
     },
     serde::StringEnum,
-    RoomAliasId, RoomId, UInt, UserId,
+    OwnedRoomAliasId, OwnedRoomId, OwnedUserId, UInt,
 };
 use serde::{Deserialize, Serialize};
 
@@ -147,13 +147,13 @@ pub enum SortDirection {
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct RoomDetails {
     /// Room ID
-    pub room_id: Box<RoomId>,
+    pub room_id: OwnedRoomId,
 
     /// Room name
     pub name: Option<String>,
 
     /// Room alias ID
-    pub canonical_alias: Option<Box<RoomAliasId>>,
+    pub canonical_alias: Option<OwnedRoomAliasId>,
 
     /// Amount of joined members.
     pub joined_members: UInt,
@@ -166,7 +166,7 @@ pub struct RoomDetails {
 
     /// User ID of the room creator.
     #[serde(deserialize_with = "ruma::serde::empty_string_as_none")]
-    pub creator: Option<Box<UserId>>,
+    pub creator: Option<OwnedUserId>,
 
     /// Room encryption.
     pub encryption: Option<String>,
