@@ -23,6 +23,11 @@ jobs:
       with:
         command: fmt
         args: -- --check
+    - name: Check all features
+      uses: actions-rs/cargo@v1
+      with:
+        command: check
+        args: --all-features
     - name: Catch common mistakes
       uses: actions-rs/cargo@v1
       with:
