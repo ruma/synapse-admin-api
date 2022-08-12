@@ -1,6 +1,7 @@
 //! [GET /_synapse/admin/v1/register](https://matrix-org.github.io/synapse/latest/admin_api/register_api.html#shared-secret-registration)
 
 use ruma::api::ruma_api;
+use serde::{Deserialize, Serialize};
 
 ruma_api! {
     metadata: {
@@ -16,8 +17,9 @@ ruma_api! {
     request: {}
 
     response: {
-        /// The nonce that can be used for shared-secret registration.
-        pub nonce: String,
+        /// The nonce.
+        #[ruma_api(body)]
+        pub nonce: Nonce,
     }
 }
 
@@ -31,6 +33,13 @@ impl Request {
 impl Response {
     /// Creates a `Response` with the given `nonce`.
     pub fn new(nonce: String) -> Self {
-        Self { nonce }
+        Self { nonce: Nonce { nonce } }
     }
+}
+
+/// Shared-secret registration nonce.
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct Nonce {
+    /// The nonce that can be used for shared-secret registration.
+    pub nonce: String,
 }

@@ -3,6 +3,7 @@
 #[cfg(feature = "shared-secret-registration-mac")]
 use hmac::{digest::InvalidLength, Hmac, Mac};
 use ruma::{api::ruma_api, OwnedDeviceId, OwnedServerName, OwnedUserId};
+use serde::{Deserialize, Serialize};
 #[cfg(feature = "shared-secret-registration-mac")]
 use sha1::Sha1;
 
@@ -44,17 +45,9 @@ ruma_api! {
     }
 
     response: {
-        /// Access token.
-        pub access_token: String,
-
-        /// Registered user id.
-        pub user_id: OwnedUserId,
-
-        /// Homeserver name.
-        pub home_server: OwnedServerName,
-
-        /// Device ID.
-        pub device_id: OwnedDeviceId,
+        /// Details about the registration.
+        #[ruma_api(body)]
+        pub details: RegisterDetails,
     }
 }
 
@@ -73,15 +66,26 @@ impl<'a> Request<'a> {
 }
 
 impl Response {
-    /// Creates a `Response` with the given data.
-    pub fn new(
-        access_token: String,
-        user_id: OwnedUserId,
-        home_server: OwnedServerName,
-        device_id: OwnedDeviceId,
-    ) -> Self {
-        Self { access_token, user_id, home_server, device_id }
+    /// Creates a `Response` with the given details.
+    pub fn new(details: RegisterDetails) -> Self {
+        Self { details }
     }
+}
+
+/// Details about the registration.
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct RegisterDetails {
+    /// Access token.
+    pub access_token: String,
+
+    /// Registered user id.
+    pub user_id: OwnedUserId,
+
+    /// Homeserver name.
+    pub home_server: OwnedServerName,
+
+    /// Device ID.
+    pub device_id: OwnedDeviceId,
 }
 
 /// Calculate the MAC based on the given inputs.
