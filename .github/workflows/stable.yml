@@ -17,6 +17,11 @@ jobs:
         toolchain: stable
         profile: minimal
         override: true
+    - name: Check all features
+      uses: actions-rs/cargo@v1
+      with:
+        command: check
+        args: --all-features
     - name: Run tests
       uses: actions-rs/cargo@v1
       with:
