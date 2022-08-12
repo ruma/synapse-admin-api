@@ -8,6 +8,7 @@
 use std::fmt;
 
 pub mod account_validity;
+pub mod register_users;
 pub mod rooms;
 pub mod users;
 pub mod version;

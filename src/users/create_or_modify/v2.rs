@@ -1,4 +1,4 @@
-//! [GET /_synapse/admin/v2/users/:user_id](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/user_admin_api.rst#create-or-modify-account)
+//! [PUT /_synapse/admin/v2/users/:user_id](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/user_admin_api.rst#create-or-modify-account)
 
 pub use crate::users::{ExternalId, UserDetails};
 use ruma::{api::ruma_api, thirdparty::ThirdPartyIdentifier, UserId};
