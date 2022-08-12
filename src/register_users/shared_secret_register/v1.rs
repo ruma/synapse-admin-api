@@ -1,6 +1,13 @@
 //! [POST /_synapse/admin/v1/register](https://matrix-org.github.io/synapse/latest/admin_api/register_api.html#shared-secret-registration)
 
+#[cfg(feature = "shared-secret-registration-mac")]
+use hmac::{digest::InvalidLength, Hmac, Mac};
 use ruma::{api::ruma_api, OwnedDeviceId, OwnedServerName, OwnedUserId};
+#[cfg(feature = "shared-secret-registration-mac")]
+use sha1::Sha1;
+
+#[cfg(feature = "shared-secret-registration-mac")]
+type HmacSha1 = Hmac<Sha1>;
 
 ruma_api! {
     metadata: {
@@ -75,4 +82,35 @@ impl Response {
     ) -> Self {
         Self { access_token, user_id, home_server, device_id }
     }
+}
+
+/// Calculate the MAC based on the given inputs.
+///
+/// See <https://matrix-org.github.io/synapse/latest/admin_api/register_api.html#shared-secret-registration> for details.
+#[cfg(feature = "shared-secret-registration-mac")]
+pub fn hmac(
+    registration_shared_secret: &str,
+    nonce: &str,
+    username: &str,
+    password: &str,
+    admin: bool,
+) -> Result<String, InvalidLength> {
+    let mut mac = HmacSha1::new_from_slice(registration_shared_secret.as_bytes())?;
+    mac.update(nonce.as_bytes());
+    mac.update(b"\x00");
+    mac.update(username.as_bytes());
+    mac.update(b"\x00");
+    mac.update(password.as_bytes());
+    mac.update(b"\x00");
+    mac.update({
+        if admin {
+            b"admin"
+        } else {
+            b"notadmin"
+        }
+    });
+    let mac = mac.finalize();
+    let mac = hex::encode(mac.into_bytes());
+
+    Ok(mac)
 }
