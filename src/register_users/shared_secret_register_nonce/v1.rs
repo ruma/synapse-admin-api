@@ -1,7 +1,6 @@
 //! [GET /_synapse/admin/v1/register](https://matrix-org.github.io/synapse/latest/admin_api/register_api.html#shared-secret-registration)
 
 use ruma::api::ruma_api;
-use serde::Deserialize;
 
 ruma_api! {
     metadata: {
