@@ -47,7 +47,7 @@ ruma_api! {
         /// Homeserver name.
         pub home_server: OwnedServerName,
 
-        /// Device id.
+        /// Device ID.
         pub device_id: OwnedDeviceId,
     }
 }
