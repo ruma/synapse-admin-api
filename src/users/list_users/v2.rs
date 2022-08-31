@@ -1,6 +1,5 @@
 //! [GET /_synapse/admin/v2/users/:user_id](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/user_admin_api.rst#list-accountshttps://github.com/matrix-org/synapse/blob/master/docs/admin_api/user_admin_api.rst#query-user-account)
 
-use crate::serde::boolean_as_uint;
 use ruma::{api::ruma_api, UInt, UserId};
 use serde::{Deserialize, Serialize};
 
@@ -96,15 +95,15 @@ pub struct UserMinorDetails {
     pub user_type: Option<String>,
 
     /// Is the account a guest
-    #[serde(with = "boolean_as_uint")]
+    #[serde(deserialize_with = "crate::serde::bool_or_uint")]
     pub is_guest: bool,
 
     /// Is the user a server admin
-    #[serde(with = "boolean_as_uint")]
+    #[serde(deserialize_with = "crate::serde::bool_or_uint")]
     pub admin: bool,
 
     /// Is the account deactivated
-    #[serde(with = "boolean_as_uint")]
+    #[serde(deserialize_with = "crate::serde::bool_or_uint")]
     pub deactivated: bool,
 
     /// The user's display name, if set.

@@ -172,9 +172,11 @@ pub struct RoomDetails {
     pub encryption: Option<String>,
 
     /// Whether the room is federatable
+    #[serde(deserialize_with = "crate::serde::bool_or_uint")]
     pub federatable: bool,
 
     /// Whether the room is public.
+    #[serde(deserialize_with = "crate::serde::bool_or_uint")]
     pub public: bool,
 
     /// Join rules of the room.

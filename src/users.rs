@@ -7,7 +7,6 @@ pub mod list_joined_rooms;
 pub mod list_users;
 pub mod reset_password;
 
-use crate::serde::boolean_as_uint;
 use ruma::{thirdparty::ThirdPartyIdentifier, SecondsSinceUnixEpoch};
 use serde::{Deserialize, Serialize};
 
@@ -21,11 +20,11 @@ pub struct UserDetails {
     pub password_hash: Option<String>,
 
     /// Is the account a guest
-    #[serde(with = "boolean_as_uint")]
+    #[serde(deserialize_with = "crate::serde::bool_or_uint")]
     pub is_guest: bool,
 
     /// Is the user a server admin
-    #[serde(with = "boolean_as_uint")]
+    #[serde(deserialize_with = "crate::serde::bool_or_uint")]
     pub admin: bool,
 
     /// todo: doc but I do not know what this is
@@ -49,7 +48,7 @@ pub struct UserDetails {
     pub user_type: Option<String>,
 
     /// Is the account deactivated
-    #[serde(with = "boolean_as_uint")]
+    #[serde(deserialize_with = "crate::serde::bool_or_uint")]
     pub deactivated: bool,
 
     /// The user's display name, if set.
