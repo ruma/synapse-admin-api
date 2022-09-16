@@ -1,5 +1,7 @@
 # [unreleased]
 
+* Upgrade ruma dependency to 0.7.2
+
 # 0.4.0
 
 * Upgrade ruma dependency to 0.6.4
