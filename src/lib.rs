@@ -3,7 +3,9 @@
 //!
 //! [api]: https://github.com/matrix-org/synapse/tree/master/docs/admin_api
 
-#![warn(missing_debug_implementations, missing_docs)]
+// FIXME: don't allow dead code, warn on missing docs
+#![allow(dead_code)]
+#![warn(missing_debug_implementations)]
 
 use std::fmt;
 

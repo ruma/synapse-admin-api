@@ -1,27 +1,27 @@
 //! [GET /_synapse/admin/v1/server_version](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/version_api.rst)
 
-use ruma::api::ruma_api;
+use ruma::api::{metadata, request, response, Metadata};
 
-ruma_api! {
-    metadata: {
-        description: "Get the Synapse and Python version of this homeserver.",
-        method: GET,
-        name: "get_server_version_v1",
-        unstable_path: "/_synapse/admin/v1/server_version",
-        rate_limited: false,
-        authentication: None, // AccessToken?
+const METADATA: Metadata = metadata! {
+    method: GET,
+    rate_limited: false,
+    authentication: None, // AccessToken?
+    history: {
+        unstable => "/_synapse/admin/v1/server_version",
     }
+};
 
-    #[derive(Default)]
-    request: {}
+#[request]
+#[derive(Default)]
+pub struct Request {}
 
-    response: {
-        /// The Synapse version.
-        pub server_version: String,
+#[response]
+pub struct Response {
+    /// The Synapse version.
+    pub server_version: String,
 
-        /// The Python version.
-        pub python_version: String,
-    }
+    /// The Python version.
+    pub python_version: String,
 }
 
 impl Request {

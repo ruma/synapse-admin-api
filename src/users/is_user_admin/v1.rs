@@ -1,28 +1,30 @@
 //! [GET /_synapse/admin/v1/users/:user_id/admin](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/user_admin_api.rst#get-whether-a-user-is-a-server-administrator-or-not)
 
-use ruma::{api::ruma_api, UserId};
+use ruma::{
+    api::{metadata, request, response, Metadata},
+    UserId,
+};
 
-ruma_api! {
-    metadata: {
-        description: "is admin endpoint",
-        method: GET,
-        name: "is_user_admin_v1",
-        unstable_path: "/_synapse/admin/v1/users/:user_id/admin",
-        rate_limited: false,
-        authentication: AccessToken,
+const METADATA: Metadata = metadata! {
+    method: GET,
+    rate_limited: false,
+    authentication: AccessToken,
+    history: {
+        unstable => "/_synapse/admin/v1/users/:user_id/admin",
     }
+};
 
-    request: {
-        /// User to check.
-        #[ruma_api(path)]
-        pub user_id: &'a UserId,
-    }
+#[request]
+pub struct Request<'a> {
+    /// User to check.
+    #[ruma_api(path)]
+    pub user_id: &'a UserId,
+}
 
-    response: {
-        /// Whether the requested user ID is an admin.
-        pub admin: bool,
-    }
-
+#[response]
+pub struct Response {
+    /// Whether the requested user ID is an admin.
+    pub admin: bool,
 }
 
 impl<'a> Request<'a> {

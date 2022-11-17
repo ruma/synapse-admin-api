@@ -2,60 +2,63 @@
 
 #[cfg(feature = "shared-secret-registration-mac")]
 use hmac::{digest::InvalidLength, Hmac, Mac};
-use ruma::{api::ruma_api, OwnedDeviceId, OwnedServerName, OwnedUserId};
+use ruma::{
+    api::{metadata, request, response, Metadata},
+    OwnedDeviceId, OwnedServerName, OwnedUserId,
+};
 #[cfg(feature = "shared-secret-registration-mac")]
 use sha1::Sha1;
 
 #[cfg(feature = "shared-secret-registration-mac")]
 type HmacSha1 = Hmac<Sha1>;
 
-ruma_api! {
-    metadata: {
-        description: "Shared-secret registration",
-        method: POST,
-        name: "shared_secret_register_v1",
-        unstable_path: "/_synapse/admin/v1/register",
-        rate_limited: false,
-        authentication: None,
+const METADATA: Metadata = metadata! {
+    method: POST,
+    rate_limited: false,
+    authentication: None,
+    history: {
+        unstable => "/_synapse/admin/v1/register",
     }
+};
 
-    #[derive(Default)]
-    request: {
-        /// The nonce retrieved from the nonce endpoint.
-        pub nonce: &'a str,
+#[request]
+#[derive(Default)]
+pub struct Request<'a> {
+    /// The nonce retrieved from the nonce endpoint.
+    pub nonce: &'a str,
 
-        /// Localpart for the account.
-        pub username: &'a str,
+    /// Localpart for the account.
+    pub username: &'a str,
 
-        /// Display name for the account.
-        pub displayname: &'a str,
+    /// Display name for the account.
+    pub displayname: &'a str,
 
-        /// Password for the account.
-        pub password: &'a str,
+    /// Password for the account.
+    pub password: &'a str,
 
-        /// Whether the account should be an admin.
-        pub admin: bool,
+    /// Whether the account should be an admin.
+    pub admin: bool,
 
-        /// The MAC is the hex digest output of the HMAC-SHA1 algorithm, with
-        /// the key being the shared secret and the content being the nonce,
-        /// user, password, either the string "admin" or "notadmin", and
-        /// optionally the user_type each separated by NULs.
-        pub mac: &'a str,
-    }
+    /// The MAC is the hex digest output of the HMAC-SHA1 algorithm, with
+    /// the key being the shared secret and the content being the nonce,
+    /// user, password, either the string "admin" or "notadmin", and
+    /// optionally the user_type each separated by NULs.
+    pub mac: &'a str,
+}
 
-    response: {
-        /// Access token.
-        pub access_token: String,
+#[response]
+pub struct Response {
+    /// Access token.
+    pub access_token: String,
 
-        /// Registered user id.
-        pub user_id: OwnedUserId,
+    /// Registered user id.
+    pub user_id: OwnedUserId,
 
-        /// Homeserver name.
-        pub home_server: OwnedServerName,
+    /// Homeserver name.
+    pub home_server: OwnedServerName,
 
-        /// Device ID.
-        pub device_id: OwnedDeviceId,
-    }
+    /// Device ID.
+    pub device_id: OwnedDeviceId,
 }
 
 impl<'a> Request<'a> {

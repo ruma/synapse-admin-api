@@ -1,30 +1,33 @@
 //! [POST /_synapse/admin/v1/deactivate/:user_id](https://github.com/matrix-org/synapse/blob/develop/docs/admin_api/user_admin_api.rst#deactivate-account)
 
-use ruma::{api::ruma_api, UserId};
+use ruma::{
+    api::{metadata, request, response, Metadata},
+    UserId,
+};
 
-ruma_api! {
-    metadata: {
-        description: "Deactivate a user account",
-        method: POST,
-        name: "deactivate_account_v1",
-        unstable_path: "/_synapse/admin/v1/deactivate/:user_id",
-        rate_limited: false,
-        authentication: AccessToken,
+const METADATA: Metadata = metadata! {
+    method: POST,
+    rate_limited: false,
+    authentication: AccessToken,
+    history: {
+        unstable => "/_synapse/admin/v1/deactivate/:user_id",
     }
+};
 
-    request: {
-        /// User ID
-        #[ruma_api(path)]
-        pub user_id: &'a UserId,
+#[request]
+pub struct Request<'a> {
+    /// User ID
+    #[ruma_api(path)]
+    pub user_id: &'a UserId,
 
-        /// Flag wether to erase the account.
-        #[serde(default = "ruma::serde::default_false", skip_serializing_if = "ruma::serde::is_false")]
-        pub erase: bool,
-    }
-
-    #[derive(Default)]
-    response: {}
+    /// Flag wether to erase the account.
+    #[serde(default = "ruma::serde::default_false", skip_serializing_if = "ruma::serde::is_false")]
+    pub erase: bool,
 }
+
+#[derive(Default)]
+#[response]
+pub struct Response {}
 
 impl<'a> Request<'a> {
     /// Creates a `Request` with the given user ID.
