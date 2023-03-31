@@ -5,6 +5,7 @@ pub mod get_details;
 pub mod is_user_admin;
 pub mod list_joined_rooms;
 pub mod list_users;
+pub mod login_as_a_user;
 pub mod reset_password;
 
 use ruma::{thirdparty::ThirdPartyIdentifier, SecondsSinceUnixEpoch};
