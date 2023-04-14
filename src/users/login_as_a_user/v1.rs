@@ -23,7 +23,6 @@ pub struct Request<'a> {
     /// Optional: Integer UNIX timestamp in milliseconds for when the access token should expire.
     /// If not specified, the returned access token does not expire.
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    #[ruma_api(body)]
     pub valid_until_ms: Option<u64>,
 }
 
