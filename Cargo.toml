@@ -20,7 +20,7 @@ unstable-exhaustive-types = []
 [dependencies]
 hex = { version = "0.4.3", optional = true }
 hmac = { version = "0.12.1", optional = true }
-ruma = { git = "https://github.com/ruma/ruma", rev = "ed100afddb5fb30f1ccf368d7e712a3a483e63bf", features = ["api", "events"] }
+ruma = { git = "https://github.com/ruma/ruma", rev = "0143bd9b9f5dcfcaa835afb76f342c12f014f945", features = ["api", "events"] }
 serde = { version = "1.0.118", features = ["derive"] }
 sha1 = { version = "0.10.1", optional = true }
 

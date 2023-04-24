@@ -82,7 +82,7 @@ impl Response {
 }
 
 /// Enum to define the sorting method of rooms.
-#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, StringEnum)]
+#[derive(Clone, PartialEq, Eq, PartialOrd, Ord, StringEnum)]
 #[ruma_enum(rename_all = "snake_case")]
 pub enum RoomSortOrder {
     /// Sort by name alphabetical
@@ -129,7 +129,7 @@ pub enum RoomSortOrder {
 }
 
 /// Enum to define the sort order direction.
-#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, StringEnum)]
+#[derive(Clone, PartialEq, Eq, PartialOrd, Ord, StringEnum)]
 pub enum SortDirection {
     /// Sort direction backward.
     #[ruma_enum(rename = "b")]
