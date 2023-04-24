@@ -23,18 +23,18 @@ const METADATA: Metadata = metadata! {
 
 #[request]
 #[derive(Default)]
-pub struct Request<'a> {
+pub struct Request {
     /// The nonce retrieved from the nonce endpoint.
-    pub nonce: &'a str,
+    pub nonce: String,
 
     /// Localpart for the account.
-    pub username: &'a str,
+    pub username: String,
 
     /// Display name for the account.
-    pub displayname: &'a str,
+    pub displayname: String,
 
     /// Password for the account.
-    pub password: &'a str,
+    pub password: String,
 
     /// Whether the account should be an admin.
     pub admin: bool,
@@ -43,7 +43,7 @@ pub struct Request<'a> {
     /// the key being the shared secret and the content being the nonce,
     /// user, password, either the string "admin" or "notadmin", and
     /// optionally the user_type each separated by NULs.
-    pub mac: &'a str,
+    pub mac: String,
 }
 
 #[response]
@@ -61,15 +61,15 @@ pub struct Response {
     pub device_id: OwnedDeviceId,
 }
 
-impl<'a> Request<'a> {
+impl Request {
     /// Creates a `Request` with the given data.
     pub fn new(
-        nonce: &'a str,
-        username: &'a str,
-        displayname: &'a str,
-        password: &'a str,
+        nonce: String,
+        username: String,
+        displayname: String,
+        password: String,
         admin: bool,
-        mac: &'a str,
+        mac: String,
     ) -> Self {
         Self { nonce, username, displayname, password, admin, mac }
     }

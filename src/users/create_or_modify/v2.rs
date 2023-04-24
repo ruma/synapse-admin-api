@@ -3,7 +3,7 @@
 use ruma::{
     api::{metadata, request, response, Metadata},
     thirdparty::ThirdPartyIdentifier,
-    UserId,
+    OwnedUserId,
 };
 
 pub use crate::users::{ExternalId, UserDetails};
@@ -18,14 +18,14 @@ const METADATA: Metadata = metadata! {
 };
 
 #[request]
-pub struct Request<'a> {
+pub struct Request {
     /// User ID for the account to renew
     #[ruma_api(path)]
-    pub user_id: &'a UserId,
+    pub user_id: OwnedUserId,
 
     /// This is an optional parameter. Add this parameter to create an account or set this
     /// password as new one for an existing account.
-    pub password: Option<&'a str>,
+    pub password: Option<String>,
 
     // NOTE: Server explodes if attributes are not omitted but specified as null, like the default
     // Serde case.
@@ -77,9 +77,9 @@ pub struct Response {
 // TODO: ruma api serialisis Ok if status code < 400, alse error. That should be diskussed.
 // The redirect 300 area is Ok too.
 
-impl<'a> Request<'a> {
+impl Request {
     /// Creates a Request with the user ID and the optional password.
-    pub fn new(user_id: &'a UserId, password: Option<&'a str>) -> Self {
+    pub fn new(user_id: OwnedUserId, password: Option<String>) -> Self {
         Self {
             user_id,
             password,

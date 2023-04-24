@@ -2,7 +2,7 @@
 
 use ruma::{
     api::{metadata, request, response, Metadata},
-    UserId,
+    OwnedUserId,
 };
 
 const METADATA: Metadata = metadata! {
@@ -15,10 +15,10 @@ const METADATA: Metadata = metadata! {
 };
 
 #[request]
-pub struct Request<'a> {
+pub struct Request {
     /// User to check.
     #[ruma_api(path)]
-    pub user_id: &'a UserId,
+    pub user_id: OwnedUserId,
 }
 
 #[response]
@@ -27,9 +27,9 @@ pub struct Response {
     pub admin: bool,
 }
 
-impl<'a> Request<'a> {
+impl Request {
     /// Creates an `Request` with the given user ID.
-    pub fn new(user_id: &'a UserId) -> Self {
+    pub fn new(user_id: OwnedUserId) -> Self {
         Self { user_id }
     }
 }

@@ -15,10 +15,10 @@ const METADATA: Metadata = metadata! {
 };
 
 #[request]
-pub struct Request<'a> {
+pub struct Request {
     /// User ID
     #[ruma_api(path)]
-    pub user_id: &'a UserId,
+    pub user_id: OwnedUserId,
 
     /// Flag wether to erase the account.
     #[serde(default = "ruma::serde::default_false", skip_serializing_if = "ruma::serde::is_false")]
@@ -29,9 +29,9 @@ pub struct Request<'a> {
 #[response]
 pub struct Response {}
 
-impl<'a> Request<'a> {
+impl Request {
     /// Creates a `Request` with the given user ID.
-    pub fn new(user_id: &'a UserId) -> Self {
+    pub fn new(user_id: OwnedUserId) -> Self {
         Self { user_id }
     }
 }

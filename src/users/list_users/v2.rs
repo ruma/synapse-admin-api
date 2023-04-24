@@ -2,7 +2,7 @@
 
 use ruma::{
     api::{metadata, request, response, Metadata},
-    UInt, UserId,
+    OwnedUserId, UInt,
 };
 use serde::{Deserialize, Serialize};
 
@@ -17,7 +17,7 @@ const METADATA: Metadata = metadata! {
 
 #[request]
 #[derive(Default)]
-pub struct Request<'a> {
+pub struct Request {
     /// Offset in the returned list.
     ///
     /// Defaults to 0.
@@ -35,13 +35,13 @@ pub struct Request<'a> {
     /// This parameter is ignored when using the name parameter.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[ruma_api(query)]
-    pub user_id: Option<&'a UserId>,
+    pub user_id: Option<OwnedUserId>,
 
     /// name is optional and filters to only return users with user ID localparts or displaynames
     /// that contain this value.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[ruma_api(query)]
-    pub name: Option<&'a str>,
+    pub name: Option<String>,
 
     /// The parameter guests is optional and if false will exclude guest users.
     ///
@@ -74,7 +74,7 @@ pub struct Response {
     pub total: UInt,
 }
 
-impl<'a> Request<'a> {
+impl Request {
     /// Creates an empty `Request`.
     pub fn new() -> Self {
         Default::default()

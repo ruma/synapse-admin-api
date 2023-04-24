@@ -2,7 +2,7 @@
 
 use ruma::{
     api::{metadata, request, response, Metadata},
-    MilliSecondsSinceUnixEpoch, UserId,
+    MilliSecondsSinceUnixEpoch, OwnedUserId,
 };
 
 const METADATA: Metadata = metadata! {
@@ -15,9 +15,9 @@ const METADATA: Metadata = metadata! {
 };
 
 #[request]
-pub struct Request<'a> {
+pub struct Request {
     /// user ID for the account to renew
-    pub user_id: &'a UserId,
+    pub user_id: OwnedUserId,
 
     /// This is an optional parameter, it overrides the expiration date,
     /// which otherwise defaults to now + validity period configured at the server
@@ -36,9 +36,9 @@ pub struct Response {
     pub expiration_ts: MilliSecondsSinceUnixEpoch,
 }
 
-impl<'a> Request<'a> {
+impl Request {
     /// Creates an `Request` with the given user ID.
-    pub fn new(user_id: &'a UserId) -> Self {
+    pub fn new(user_id: OwnedUserId) -> Self {
         Self { user_id, expiration_ts: None, enable_renewal_emails: true }
     }
 }
