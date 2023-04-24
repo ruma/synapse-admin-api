@@ -11,18 +11,10 @@ jobs:
     name: Check
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions-rs/toolchain@v1
-      with:
-        toolchain: stable
-        profile: minimal
-        override: true
+    - uses: actions/checkout@v3
+    - name: Install rust nightly toolchain
+      uses: dtolnay/rust-toolchain@stable
     - name: Check all features
-      uses: actions-rs/cargo@v1
-      with:
-        command: check
-        args: --all-features
+      run: cargo check --all-features
     - name: Run tests
-      uses: actions-rs/cargo@v1
-      with:
-        command: test
+      run: cargo test
