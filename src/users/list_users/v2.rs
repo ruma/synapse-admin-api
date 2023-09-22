@@ -56,6 +56,13 @@ pub struct Request {
     #[serde(default, skip_serializing_if = "ruma::serde::is_default")]
     #[ruma_api(query)]
     pub deactivated: bool,
+
+    /// The parameter locked is optional and if true will include locked users.
+    ///
+    /// Defaults to false to exclude locked users.
+    #[serde(default, skip_serializing_if = "ruma::serde::is_default")]
+    #[ruma_api(query)]
+    pub locked: bool,
 }
 
 #[response]
@@ -116,4 +123,8 @@ pub struct UserMinorDetails {
     /// The user's avatar URL, if set.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub avatar_url: Option<String>,
+
+    /// Is the account locked
+    #[serde(deserialize_with = "crate::serde::bool_or_uint")]
+    pub locked: bool,
 }
