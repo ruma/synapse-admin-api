@@ -67,7 +67,7 @@ pub struct UserDetails {
     pub external_ids: Vec<ExternalId>,
 
     /// Is the account locked
-    #[serde(deserialize_with = "crate::serde::bool_or_uint")]
+    #[serde(default, deserialize_with = "crate::serde::bool_or_uint")]
     pub locked: bool,
 }
 
