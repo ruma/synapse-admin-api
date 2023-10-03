@@ -57,7 +57,7 @@ pub struct Request {
     #[ruma_api(query)]
     pub deactivated: bool,
 
-    /// The parameter locked is optional and if true will include locked users.
+    /// Whether to include locked users in the response.
     ///
     /// Defaults to false to exclude locked users.
     #[serde(default, skip_serializing_if = "ruma::serde::is_default")]
@@ -124,7 +124,7 @@ pub struct UserMinorDetails {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub avatar_url: Option<String>,
 
-    /// Is the account locked
+    /// Whether the account is locked.
     #[serde(deserialize_with = "crate::serde::bool_or_uint")]
     pub locked: bool,
 }
