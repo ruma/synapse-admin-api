@@ -125,6 +125,6 @@ pub struct UserMinorDetails {
     pub avatar_url: Option<String>,
 
     /// Whether the account is locked.
-    #[serde(deserialize_with = "crate::serde::bool_or_uint")]
+    #[serde(default, deserialize_with = "crate::serde::bool_or_uint")]
     pub locked: bool,
 }
