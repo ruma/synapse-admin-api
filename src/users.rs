@@ -65,6 +65,10 @@ pub struct UserDetails {
     /// A list of external auth identifiers the homeserver has associated with the user.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub external_ids: Vec<ExternalId>,
+
+    /// Is the account locked
+    #[serde(default, deserialize_with = "crate::serde::bool_or_uint")]
+    pub locked: bool,
 }
 
 /// An external ID associated with a user

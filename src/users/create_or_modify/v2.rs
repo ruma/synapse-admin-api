@@ -55,6 +55,12 @@ pub struct Request {
     /// defaults to false, or the current value if user already exists
     #[serde(skip_serializing_if = "Option::is_none")]
     pub deactivated: Option<bool>,
+
+    /// Whether the user should be locked.
+    ///
+    /// Defaults to false, or the current value if user already exists.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub locked: Option<bool>,
 }
 
 #[response]
@@ -89,6 +95,7 @@ impl Request {
             avatar_url: None,
             admin: None,
             deactivated: None,
+            locked: None,
         }
     }
 }
