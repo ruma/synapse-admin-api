@@ -23,7 +23,8 @@ pub struct Response {
     pub server_version: String,
 
     /// The Python version.
-    /// Optional since Synapse 1.94.0
+    ///
+    /// Only sent by Synapse versions before 1.94.0.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub python_version: Option<String>,
 }
