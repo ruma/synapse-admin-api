@@ -37,9 +37,9 @@ impl Request {
 }
 
 impl Response {
-    /// Creates a `Response` with the given Synapse and Python versions.
-    pub fn new(server_version: String, python_version: Option<String>) -> Self {
-        Self { server_version, python_version }
+    /// Creates a `Response` with the given Synapse versions.
+    pub fn new(server_version: String) -> Self {
+        Self { server_version, python_version: None }
     }
 }
 
@@ -48,41 +48,24 @@ fn test_response_with_python_version() {
     use serde_json;
 
     let server_version = "1.2.3".to_string();
-    let python_version = Some("4.5.6".to_string());
 
-    // create response case
-    let response = Response::new(server_version.clone(), python_version.clone());
+    // Check create response case
+    let response = Response::new(server_version.clone());
     assert_eq!(response.server_version, server_version);
-    assert_eq!(response.python_version, python_version);
+    assert_eq!(response.python_version, None);
 
-    // serialization case
-    let serialized = serde_json::to_string(&response).unwrap();
-    assert_eq!(serialized, "{\"server_version\":\"1.2.3\",\"python_version\":\"4.5.6\"}");
-
-    // deserialization case
-    let deserialized: Response = serde_json::from_str(&serialized).unwrap();
-    assert_eq!(deserialized.server_version, "1.2.3");
-    assert_eq!(deserialized.python_version, Some("4.5.6".to_string()));
-}
-
-#[test]
-fn test_response_without_python_version() {
-    use serde_json;
-
-    let server_version = "1.2.3".to_string();
-    let python_version = None;
-
-    // create response case
-    let response = Response::new(server_version.clone(), python_version);
-    assert_eq!(response.server_version, server_version);
-    assert!(response.python_version.is_none());
-
-    // serialization case
+    // Check serialization case
     let serialized = serde_json::to_string(&response).unwrap();
     assert_eq!(serialized, "{\"server_version\":\"1.2.3\"}");
 
-    // deserialization case
+    // Check deserialization case
     let deserialized: Response = serde_json::from_str(&serialized).unwrap();
     assert_eq!(deserialized.server_version, "1.2.3");
-    assert!(deserialized.python_version.is_none());
+    assert_eq!(deserialized.python_version, None);
+
+    // Check backwards compatibility
+    let old_serialized = "{\"server_version\":\"1.2.3\",\"python_version\":\"4.5.6\"}".to_string();
+    let old_deserialized: Response = serde_json::from_str(&old_serialized).unwrap();
+    assert_eq!(old_deserialized.server_version, "1.2.3");
+    assert_eq!(old_deserialized.python_version, Some("4.5.6".to_string()));
 }
