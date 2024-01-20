@@ -25,6 +25,7 @@ pub struct Request {
 }
 
 #[response]
+#[derive(Default)]
 pub struct Response {}
 
 impl Request {

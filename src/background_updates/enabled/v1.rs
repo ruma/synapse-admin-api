@@ -48,11 +48,11 @@ fn test_enabled_background_updates() {
 
     // Check create request
     let request = Request::new(enabled);
-    assert_eq!(request.enabled, true);
+    assert!(request.enabled);
 
     // Check create response
     let response = Response::new(enabled);
-    assert_eq!(request.enabled, true);
+    assert!(request.enabled);
 
     // Serialize
     let serialized = serde_json::to_string(&response).expect("Failed to serialize");
@@ -61,5 +61,5 @@ fn test_enabled_background_updates() {
     // Deserialize
     let deserialized: Response = serde_json::from_str(&serialized).expect("Failed to deserialize");
     assert_eq!(deserialized, response);
-    assert_eq!(deserialized.enabled, true);
+    assert!(deserialized.enabled);
 }

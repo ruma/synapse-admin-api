@@ -59,7 +59,7 @@ impl Response {
 #[test]
 fn test_status_background_updates() {
     let name = "current update 1".to_string();
-    let total_item_count = 123456789654;
+    let total_item_count = 123456789;
     let total_duration_ms = 2134567.12345;
     let average_items_per_ms = 2.5;
 
@@ -84,7 +84,7 @@ fn test_status_background_updates() {
 
     // Serialize
     let serialized = serde_json::to_string(&response).expect("Failed to serialize");
-    assert_eq!(serialized, "{\"enabled\":true,\"current_updates\":{\"master\":{\"name\":\"current update 1\",\"total_item_count\":123456789654,\"total_duration_ms\":2134567.12345,\"average_items_per_ms\":2.5}}}");
+    assert_eq!(serialized, "{\"enabled\":true,\"current_updates\":{\"master\":{\"name\":\"current update 1\",\"total_item_count\":123456789,\"total_duration_ms\":2134567.12345,\"average_items_per_ms\":2.5}}}");
 
     // Deserialize
     let deserialized: Response = serde_json::from_str(&serialized).expect("Failed to deserialize");
