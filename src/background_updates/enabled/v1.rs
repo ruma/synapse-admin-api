@@ -1,7 +1,9 @@
 //! [POST /_synapse/admin/v1/background_updates/enabled](https://github.com/element-hq/synapse/blob/develop/docs/usage/administration/admin_api/background_updates.md#enabled)
 
-use ruma::api::{Metadata, request, response};
-use ruma::metadata;
+use ruma::{
+    api::{request, response, Metadata},
+    metadata,
+};
 use serde::{Deserialize, Serialize};
 
 const METADATA: Metadata = metadata! {
@@ -16,7 +18,7 @@ const METADATA: Metadata = metadata! {
 #[request]
 pub struct Request {
     /// Sets whether the background updates are enabled or disabled
-    pub enabled: bool
+    pub enabled: bool,
 }
 
 #[response]
@@ -28,7 +30,9 @@ pub struct Response {
 
 impl Request {
     /// Creates a `Request` with the given `enabled` value.
-    pub fn new(enabled: bool) -> Self { Self { enabled } }
+    pub fn new(enabled: bool) -> Self {
+        Self { enabled }
+    }
 }
 
 impl Response {
@@ -40,7 +44,7 @@ impl Response {
 
 #[test]
 fn test_enabled_background_updates() {
-   let enabled = true;
+    let enabled = true;
 
     // Check create request
     let request = Request::new(enabled);

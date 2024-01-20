@@ -1,7 +1,9 @@
 //! [POST /_synapse/admin/v1/background_updates/start_job](https://github.com/element-hq/synapse/blob/master/docs/usage/administration/admin_api/background_updates.md#run)
 
-use ruma::api::{Metadata, request, response};
-use ruma::metadata;
+use ruma::{
+    api::{request, response, Metadata},
+    metadata,
+};
 
 const METADATA: Metadata = metadata! {
     method: POST,
@@ -19,7 +21,7 @@ pub struct Request {
     /// Valid values are:
     /// populate_stats_process_rooms
     /// regenerate_directory
-    pub job_name: String
+    pub job_name: String,
 }
 
 #[response]
@@ -27,7 +29,9 @@ pub struct Response {}
 
 impl Request {
     /// Creates a `Request` with the given `job_name` value.
-    pub fn new(job_name: String) -> Self { Self { job_name } }
+    pub fn new(job_name: String) -> Self {
+        Self { job_name }
+    }
 }
 
 impl Response {
