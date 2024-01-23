@@ -33,7 +33,7 @@ pub struct CurrentUpdate {
     pub name: String,
 
     /// Total number of processed "items"
-    pub total_item_count: i32,
+    pub total_item_count: u64,
 
     /// Runtime of background process, not including sleeping time
     pub total_duration_ms: f64,

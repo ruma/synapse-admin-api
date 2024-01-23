@@ -3,6 +3,7 @@
 use ruma::{
     api::{request, response, Metadata},
     metadata,
+    serde::StringEnum,
 };
 
 const METADATA: Metadata = metadata! {
@@ -17,11 +18,7 @@ const METADATA: Metadata = metadata! {
 #[request]
 pub struct Request {
     /// A string which job to run
-    ///
-    /// Valid values are:
-    /// populate_stats_process_rooms
-    /// regenerate_directory
-    pub job_name: String,
+    pub job_name: JobName,
 }
 
 #[response]
@@ -30,7 +27,7 @@ pub struct Response {}
 
 impl Request {
     /// Creates a `Request` with the given `job_name` value.
-    pub fn new(job_name: String) -> Self {
+    pub fn new(job_name: JobName) -> Self {
         Self { job_name }
     }
 }
@@ -42,9 +39,21 @@ impl Response {
     }
 }
 
+#[derive(Clone, PartialEq, StringEnum)]
+#[ruma_enum(rename_all = "snake_case")]
+pub enum JobName {
+    /// Recalculate the stats for all rooms.
+    PopulateStatsProcessRooms,
+    /// Recalculate the user directory if it is stale or out of sync
+    RegenerateDirectory,
+
+    #[doc(hidden)]
+    _Custom(crate::PrivOwnedStr),
+}
+
 #[test]
 fn test_run_background_updates() {
-    let job_name = "test-job-name".to_string();
+    let job_name = JobName::PopulateStatsProcessRooms;
     // Check create request
     let request = Request::new(job_name.clone());
     assert_eq!(request.job_name, job_name);
