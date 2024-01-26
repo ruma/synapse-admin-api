@@ -17,7 +17,7 @@ const METADATA: Metadata = metadata! {
 
 #[request]
 pub struct Request {
-    /// A string which job to run
+    /// Which job to run.
     pub job_name: JobName,
 }
 

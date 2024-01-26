@@ -17,7 +17,7 @@ const METADATA: Metadata = metadata! {
 
 #[request]
 pub struct Request {
-    /// Sets whether the background updates are enabled or disabled
+    /// Sets whether the background updates are enabled.
     pub enabled: bool,
 }
 
