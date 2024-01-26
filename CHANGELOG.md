@@ -4,6 +4,7 @@
 * Work around a Synapse issue affecting sqlite configurations
 * Update v1/server_version endpoint response data with optional python_version key
 * Upgrade to ruma 0.9.4
+* Add background updates endpoints
 
 # 0.4.0
 
