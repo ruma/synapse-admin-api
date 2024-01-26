@@ -1,5 +1,7 @@
 # [unreleased]
 
+# 0.6.0
+
 * Update v1/server_version endpoint response data with optional python_version key
 * Upgrade to ruma 0.9.4
 * Add background updates endpoints
