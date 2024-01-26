@@ -44,7 +44,8 @@ impl Response {
 pub enum JobName {
     /// Recalculate the stats for all rooms.
     PopulateStatsProcessRooms,
-    /// Recalculate the user directory if it is stale or out of sync
+
+    /// Recalculate the user directory if it is stale or out of sync.
     RegenerateDirectory,
 
     #[doc(hidden)]
