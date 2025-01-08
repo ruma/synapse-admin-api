@@ -13,6 +13,7 @@ pub mod account_validity;
 pub mod background_updates;
 pub mod experimental_features;
 pub mod register_users;
+pub mod room_membership;
 pub mod rooms;
 pub mod users;
 pub mod version;
