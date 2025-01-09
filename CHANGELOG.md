@@ -1,5 +1,10 @@
 # [unreleased]
 
+# 0.7.0
+
+* Upgrade to ruma 0.12.0
+* Add room_membership api
+
 # 0.6.0
 
 * Update v1/server_version endpoint response data with optional python_version key
