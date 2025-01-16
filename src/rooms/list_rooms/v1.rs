@@ -1,10 +1,9 @@
-//! [GET /_synapse/admin/v1/rooms](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/rooms.md#list-room-api)
+//! [GET /_synapse/admin/v1/rooms](https://github.com/element-hq/synapse/blob/master/docs/admin_api/rooms.md#list-room-api)
 use ruma::{
     api::{metadata, request, response, Metadata},
-    events::room::{
-        guest_access::GuestAccess, history_visibility::HistoryVisibility, join_rules::JoinRule,
-    },
+    events::room::{guest_access::GuestAccess, history_visibility::HistoryVisibility},
     serde::StringEnum,
+    space::SpaceRoomJoinRule,
     OwnedRoomAliasId, OwnedRoomId, OwnedUserId, UInt,
 };
 use serde::{Deserialize, Serialize};
@@ -180,13 +179,13 @@ pub struct RoomDetails {
     pub public: bool,
 
     /// Join rules of the room.
-    pub join_rules: JoinRule,
+    pub join_rules: Option<SpaceRoomJoinRule>,
 
     /// Guest access of the room
-    pub guest_access: GuestAccess,
+    pub guest_access: Option<GuestAccess>,
 
     /// History visibility of the room
-    pub history_visibility: HistoryVisibility,
+    pub history_visibility: Option<HistoryVisibility>,
 
     /// State events of the room.
     pub state_events: UInt,
