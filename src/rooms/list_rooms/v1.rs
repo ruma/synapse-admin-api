@@ -2,6 +2,7 @@
 use ruma::{
     api::{metadata, request, response, Metadata},
     events::room::{guest_access::GuestAccess, history_visibility::HistoryVisibility},
+    room::RoomType,
     serde::StringEnum,
     space::SpaceRoomJoinRule,
     OwnedRoomAliasId, OwnedRoomId, OwnedUserId, UInt,
@@ -161,7 +162,7 @@ pub struct RoomDetails {
     pub joined_local_members: UInt,
 
     /// Room version
-    pub version: String,
+    pub version: Option<String>,
 
     /// User ID of the room creator.
     #[serde(deserialize_with = "ruma::serde::empty_string_as_none")]
@@ -189,4 +190,7 @@ pub struct RoomDetails {
 
     /// State events of the room.
     pub state_events: UInt,
+
+    /// Room type of the room.
+    pub room_type: Option<RoomType>,
 }
