@@ -8,7 +8,7 @@ Breaking changes:
 Improvement:
 
 * The list_room response now includes the `room_type` field
-
+* Add room_details api
 
 # 0.7.0
 
