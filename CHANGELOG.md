@@ -1,5 +1,15 @@
 # [unreleased]
 
+Breaking changes:
+
+* The list_room response changes the fields `version`, `join_rules`, `guest_access` and `history_visibility` to be an option
+* The list_room response changes the `join_rules` field to be `Option<SpaceRoomJoinRule>`
+
+Improvement:
+
+* The list_room response now includes the `room_type` field
+
+
 # 0.7.0
 
 * Upgrade to ruma 0.12.0
