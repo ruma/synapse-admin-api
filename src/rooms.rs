@@ -2,3 +2,4 @@
 
 pub mod list_rooms;
 pub mod room_details;
+pub mod room_members;
