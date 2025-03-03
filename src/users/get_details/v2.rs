@@ -1,10 +1,11 @@
 //! [GET /_synapse/admin/v2/users/:user_id](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/user_admin_api.rst#query-user-account)
 
-pub use crate::users::UserDetails;
 use ruma::{
     api::{metadata, request, response, Metadata},
     OwnedUserId,
 };
+
+pub use crate::users::UserDetails;
 
 const METADATA: Metadata = metadata! {
     method: GET,

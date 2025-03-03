@@ -1,8 +1,9 @@
 //! [GET /_synapse/admin/v1/background_updates/status](https://github.com/element-hq/synapse/blob/master/docs/usage/administration/admin_api/background_updates.md#status)
 
+use std::collections::HashMap;
+
 use ruma::api::{metadata, request, response, Metadata};
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
 
 const METADATA: Metadata = metadata! {
     method: GET,
@@ -58,14 +59,14 @@ impl Response {
 
 #[test]
 fn test_status_background_updates() {
-    let name = "current update 1".to_string();
-    let total_item_count = 123456789;
-    let total_duration_ms = 2134567.12345;
+    let name = "current update 1";
+    let total_item_count = 123_456_789;
+    let total_duration_ms = 2_134_567.123_45;
     let average_items_per_ms = 2.5;
 
     // Create the current update
     let update = CurrentUpdate {
-        name: name.clone(),
+        name: name.to_owned(),
         total_item_count,
         total_duration_ms,
         average_items_per_ms,
@@ -77,7 +78,7 @@ fn test_status_background_updates() {
 
     // Create the hashmap
     let mut current_updates = HashMap::new();
-    current_updates.insert("master".to_string(), update);
+    current_updates.insert("master".to_owned(), update);
     let enabled = true;
 
     let response = Response::new(enabled, current_updates);

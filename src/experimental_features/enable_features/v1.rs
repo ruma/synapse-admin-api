@@ -59,8 +59,9 @@ impl Response {
 
 #[test]
 fn test_enable_features() {
-    use ruma::UserId;
     use std::convert::TryFrom;
+
+    use ruma::UserId;
 
     let features =
         ExperimentalFeatures { msc3026: Option::from(true), msc3881: None, msc3967: None };
