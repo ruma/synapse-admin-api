@@ -1,0 +1,42 @@
+# https://embarkstudios.github.io/cargo-deny/checks/cfg.html
+
+[graph]
+all-features = true
+exclude = [
+    # dev only dependency
+    "criterion"
+]
+
+[advisories]
+version = 2
+
+[licenses]
+version = 2
+allow = [
+    "Apache-2.0",
+    "BSD-3-Clause",
+    "MIT",
+    "MPL-2.0",
+    "Unicode-3.0",
+    "Zlib",
+]
+private = { ignore = true }
+
+[bans]
+multiple-versions = "warn"
+wildcards = "deny"
+
+[[bans.features]]
+name = "serde_json"
+# These features all don't make sense to activate from a library as they apply
+# globally to all users of serde_json. Make sure we don't enable them somehow.
+deny = [
+    "arbitrary_precision",
+    "float_roundtrip",
+    "preserve_order",
+    "unbounded_depth",
+]
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"

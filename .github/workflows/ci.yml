@@ -1,0 +1,118 @@
+name: CI
+
+env:
+  CARGO_TERM_COLOR: always
+  CARGO_REGISTRIES_CRATES_IO_PROTOCOL: sparse
+  NIGHTLY: nightly-2025-03-03
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  style:
+    name: Style
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install rust nightly toolchain
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ env.NIGHTLY }}
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Check spelling
+        uses: crate-ci/typos@v1.30.0
+
+      - name: Install cargo-sort
+        uses: taiki-e/cache-cargo-install-action@v2
+        with:
+          tool: cargo-sort
+
+      - name: Run cargo-sort
+        run: |
+          cargo sort --workspace --grouped --check \
+                     --order package,lib,features,dependencies,target,dev-dependencies,build-dependencies
+
+  msrv:
+    name: Minimum Supported Rust Version / Check All Features
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install MSRV toolchain
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: "1.81"
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          # A stable compiler update should automatically not reuse old caches.
+          # Add the MSRV as a stable cache key too so bumping it also gets us a
+          # fresh cache.
+          shared-key: msrv1.81
+
+      - name: Run checks
+        run: cargo check --all-features
+
+  stable:
+    name: Rust Stable / ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - name: Check All Features
+            cmd: check --all-features
+
+          - name: Run Tests
+            cmd: test --all-features
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install rust stable toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Run checks
+        run: cargo ${{ matrix.cmd }}
+
+  nightly:
+    name: Rust Nightly / ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - name: Check Formatting
+            cmd: fmt --check
+            components: rustfmt
+
+          - name: All Features
+            cmd: check --all-features
+
+          - name: Clippy Default Features
+            cmd: clippy --all-features --all-targets -- -D warnings
+            components: clippy
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install rust nightly toolchain
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ env.NIGHTLY }}
+          components: ${{ matrix.components }}
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Run checks
+        run: cargo ${{ matrix.cmd }}

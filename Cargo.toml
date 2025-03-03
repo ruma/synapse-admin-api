@@ -8,6 +8,7 @@ keywords = ["matrix", "chat", "messaging", "ruma"]
 license = "MIT"
 repository = "https://github.com/ruma/synapse-admin-api"
 edition = "2018"
+rust-version = "1.81"
 
 [features]
 client = []
@@ -26,6 +27,40 @@ sha1 = { version = "0.10.1", optional = true }
 serde_json = "1.0.61"
 
 [lints.rust]
+rust_2018_idioms = { level = "warn", priority = -1 }
+semicolon_in_expressions_from_macros = "warn"
 unexpected_cfgs = { level = "warn", check-cfg = [
     'cfg(ruma_unstable_exhaustive_types)', # set all types as exhaustive
 ] }
+unreachable_pub = "warn"
+unused_import_braces = "warn"
+unused_qualifications = "warn"
+
+[lints.clippy]
+branches_sharing_code = "warn"
+cloned_instead_of_copied = "warn"
+dbg_macro = "warn"
+disallowed_types = "warn"
+empty_line_after_outer_attr = "warn"
+# exhaustive_enums = "warn"
+# exhaustive_structs = "warn"
+inefficient_to_string = "warn"
+macro_use_imports = "warn"
+map_flatten = "warn"
+missing_enforced_import_renames = "warn"
+mod_module_files = "warn"
+mut_mut = "warn"
+nonstandard_macro_braces = "warn"
+semicolon_if_nothing_returned = "warn"
+str_to_string = "warn"
+todo = "warn"
+unreadable_literal = "warn"
+unseparated_literal_suffix = "warn"
+wildcard_imports = "warn"
+
+# Not that good of a lint
+new_without_default = "allow"
+# Disabled temporarily because it triggers false positives for types with generics.
+arc_with_non_send_sync = "allow"
+# Currently buggy
+literal_string_with_formatting_args = "allow"
