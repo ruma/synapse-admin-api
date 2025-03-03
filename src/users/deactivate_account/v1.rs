@@ -20,7 +20,7 @@ pub struct Request {
     #[ruma_api(path)]
     pub user_id: OwnedUserId,
 
-    /// Flag wether to erase the account.
+    /// Flag whether to erase the account.
     #[serde(default = "ruma::serde::default_false", skip_serializing_if = "ruma::serde::is_false")]
     pub erase: bool,
 }

@@ -47,10 +47,10 @@ impl Response {
 fn test_response_with_python_version() {
     use serde_json;
 
-    let server_version = "1.2.3".to_string();
+    let server_version = "1.2.3";
 
     // Check create response case
-    let response = Response::new(server_version.clone());
+    let response = Response::new(server_version.to_owned());
     assert_eq!(response.server_version, server_version);
     assert_eq!(response.python_version, None);
 
@@ -64,8 +64,8 @@ fn test_response_with_python_version() {
     assert_eq!(deserialized.python_version, None);
 
     // Check backwards compatibility
-    let old_serialized = "{\"server_version\":\"1.2.3\",\"python_version\":\"4.5.6\"}".to_string();
-    let old_deserialized: Response = serde_json::from_str(&old_serialized).unwrap();
+    let old_serialized = "{\"server_version\":\"1.2.3\",\"python_version\":\"4.5.6\"}";
+    let old_deserialized: Response = serde_json::from_str(old_serialized).unwrap();
     assert_eq!(old_deserialized.server_version, "1.2.3");
-    assert_eq!(old_deserialized.python_version, Some("4.5.6".to_string()));
+    assert_eq!(old_deserialized.python_version.as_deref(), Some("4.5.6"));
 }

@@ -11,7 +11,7 @@ where
     impl Visitor<'_> for BoolOrUIntVisitor {
         type Value = bool;
 
-        fn expecting(&self, formatter: &mut std::fmt::Formatter) -> std::fmt::Result {
+        fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             formatter.write_str("a boolean, or integer that's 0 or 1")
         }
 

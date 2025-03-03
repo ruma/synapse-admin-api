@@ -4,7 +4,7 @@ use ruma::{
     events::room::{guest_access::GuestAccess, history_visibility::HistoryVisibility},
     room::RoomType,
     space::SpaceRoomJoinRule,
-    OwnedMxcUri, OwnedRoomAliasId, OwnedRoomId, OwnedUserId, UInt,
+    uint, OwnedMxcUri, OwnedRoomAliasId, OwnedRoomId, OwnedUserId, UInt,
 };
 
 const METADATA: Metadata = metadata! {
@@ -103,9 +103,9 @@ impl Response {
             topic: None,
             avatar: None,
             canonical_alias: None,
-            joined_members: 0u32.into(),
-            joined_local_members: 0u32.into(),
-            joined_local_devices: 0u32.into(),
+            joined_members: uint!(0),
+            joined_local_members: uint!(0),
+            joined_local_devices: uint!(0),
             version: None,
             creator: None,
             encryption: None,
@@ -114,7 +114,7 @@ impl Response {
             join_rules: None,
             guest_access: None,
             history_visibility: None,
-            state_events: 0u32.into(),
+            state_events: uint!(0),
             room_type: None,
             forgotten: false,
         }

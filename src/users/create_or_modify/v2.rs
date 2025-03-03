@@ -80,7 +80,7 @@ pub struct Response {
 // The error is necessary at least at all endpoints which need auth, because a invalid login
 // response such an error
 // TODO: Should this be the real error like at ruma client api error, is Void-Default enough?
-// TODO: ruma api serialisis Ok if status code < 400, alse error. That should be diskussed.
+// TODO: ruma api serialize is Ok if status code < 400, else error. That should be discussed.
 // The redirect 300 area is Ok too.
 
 impl Request {
