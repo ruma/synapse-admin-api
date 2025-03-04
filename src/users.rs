@@ -12,6 +12,7 @@ use serde::{Deserialize, Serialize};
 
 /// User details
 #[derive(Serialize, Deserialize, Clone, Debug)]
+#[cfg_attr(not(ruma_unstable_exhaustive_types), non_exhaustive)]
 pub struct UserDetails {
     /// The user's name.
     pub name: String,
@@ -71,12 +72,44 @@ pub struct UserDetails {
     pub locked: bool,
 }
 
+impl UserDetails {
+    /// Construct a `UserDetails` with the given user name and all the other fields set to their
+    /// default value.
+    pub fn new(name: String) -> Self {
+        Self {
+            name,
+            password_hash: None,
+            is_guest: false,
+            admin: false,
+            consent_version: None,
+            consent_server_notice_sent: None,
+            appservice_id: None,
+            creation_ts: None,
+            user_type: None,
+            deactivated: false,
+            displayname: String::new(),
+            avatar_url: None,
+            threepids: Vec::new(),
+            external_ids: Vec::new(),
+            locked: false,
+        }
+    }
+}
+
 /// An external ID associated with a user
 #[derive(Clone, Debug, Deserialize, Serialize)]
+#[cfg_attr(not(ruma_unstable_exhaustive_types), non_exhaustive)]
 pub struct ExternalId {
     /// The authentication provider to which the user is associated.
     pub auth_provider: String,
 
     /// The ID known to the auth provider associated with this user.
     pub external_id: String,
+}
+
+impl ExternalId {
+    /// Construct an `ExternalId` with the given authentication provider and ID.
+    pub fn new(auth_provider: String, external_id: String) -> Self {
+        Self { auth_provider, external_id }
+    }
 }
