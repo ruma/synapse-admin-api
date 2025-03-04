@@ -3,7 +3,7 @@ use ruma::{
     api::{metadata, request, response, Metadata},
     events::room::{guest_access::GuestAccess, history_visibility::HistoryVisibility},
     room::RoomType,
-    serde::StringEnum,
+    serde::{OrdAsRefStr, PartialEqAsRefStr, PartialOrdAsRefStr, StringEnum},
     space::SpaceRoomJoinRule,
     OwnedRoomAliasId, OwnedRoomId, OwnedUserId, UInt,
 };
@@ -82,8 +82,9 @@ impl Response {
 }
 
 /// Enum to define the sorting method of rooms.
-#[derive(Clone, PartialEq, Eq, PartialOrd, Ord, StringEnum)]
+#[derive(Clone, PartialEqAsRefStr, Eq, PartialOrdAsRefStr, OrdAsRefStr, StringEnum)]
 #[ruma_enum(rename_all = "snake_case")]
+#[non_exhaustive]
 pub enum RoomSortOrder {
     /// Sort by name alphabetical
     Name,
@@ -129,7 +130,8 @@ pub enum RoomSortOrder {
 }
 
 /// Enum to define the sort order direction.
-#[derive(Clone, PartialEq, Eq, PartialOrd, Ord, StringEnum)]
+#[derive(Clone, PartialEqAsRefStr, Eq, PartialOrdAsRefStr, OrdAsRefStr, StringEnum)]
+#[non_exhaustive]
 pub enum SortDirection {
     /// Sort direction backward.
     #[ruma_enum(rename = "b")]
