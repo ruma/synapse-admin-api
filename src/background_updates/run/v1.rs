@@ -3,7 +3,7 @@
 use ruma::{
     api::{request, response, Metadata},
     metadata,
-    serde::StringEnum,
+    serde::{PartialEqAsRefStr, StringEnum},
 };
 
 const METADATA: Metadata = metadata! {
@@ -39,8 +39,9 @@ impl Response {
     }
 }
 
-#[derive(Clone, PartialEq, StringEnum)]
+#[derive(Clone, PartialEqAsRefStr, Eq, StringEnum)]
 #[ruma_enum(rename_all = "snake_case")]
+#[non_exhaustive]
 pub enum JobName {
     /// Recalculate the stats for all rooms.
     PopulateStatsProcessRooms,
