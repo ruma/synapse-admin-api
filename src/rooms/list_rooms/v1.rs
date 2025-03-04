@@ -5,7 +5,7 @@ use ruma::{
     room::RoomType,
     serde::{OrdAsRefStr, PartialEqAsRefStr, PartialOrdAsRefStr, StringEnum},
     space::SpaceRoomJoinRule,
-    OwnedRoomAliasId, OwnedRoomId, OwnedUserId, UInt,
+    uint, OwnedRoomAliasId, OwnedRoomId, OwnedUserId, UInt,
 };
 use serde::{Deserialize, Serialize};
 
@@ -147,6 +147,7 @@ pub enum SortDirection {
 
 /// Structure for all the room details.
 #[derive(Serialize, Deserialize, Clone, Debug)]
+#[cfg_attr(not(ruma_unstable_exhaustive_types), non_exhaustive)]
 pub struct RoomDetails {
     /// Room ID
     pub room_id: OwnedRoomId,
@@ -195,4 +196,28 @@ pub struct RoomDetails {
 
     /// Room type of the room.
     pub room_type: Option<RoomType>,
+}
+
+impl RoomDetails {
+    /// Construct `RoomDetails` with the given room ID and all the other fields at their default
+    /// value.
+    pub fn new(room_id: OwnedRoomId) -> Self {
+        Self {
+            room_id,
+            name: None,
+            canonical_alias: None,
+            joined_members: uint!(0),
+            joined_local_members: uint!(0),
+            version: None,
+            creator: None,
+            encryption: None,
+            federatable: false,
+            public: false,
+            join_rules: None,
+            guest_access: None,
+            history_visibility: None,
+            state_events: uint!(0),
+            room_type: None,
+        }
+    }
 }

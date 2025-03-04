@@ -26,6 +26,7 @@ pub struct Request {
 }
 
 #[derive(Serialize, Deserialize, Clone, PartialEq, Debug, Default)]
+#[cfg_attr(not(ruma_unstable_exhaustive_types), non_exhaustive)]
 pub struct ExperimentalFeatures {
     /// Whether busy presence state is enabled.
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -36,6 +37,13 @@ pub struct ExperimentalFeatures {
     /// Do not require UIA when first uploading cross-signing keys.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub msc3967: Option<bool>,
+}
+
+impl ExperimentalFeatures {
+    /// Construct an empty `ExperimentalFeatures`.
+    pub fn new() -> Self {
+        Self::default()
+    }
 }
 
 #[response]

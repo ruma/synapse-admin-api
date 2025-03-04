@@ -1,6 +1,20 @@
 //! Serializable types for the requests and responses for each endpoint in the
 //! [synapse admin API][api].
 //!
+//! # Compile-time `cfg` settings
+//!
+//! These settings are accepted at compile time to configure the generated code. They can be set as
+//! `--cfg={key}={value}` using `RUSTFLAGS` or `.cargo/config.toml` (under `[build]` -> `rustflags =
+//! ["..."]`).
+//!
+//! * `ruma_identifiers_storage` -- Choose the inner representation of `Owned*` wrapper types for
+//!   identifiers. By default they use [`Box`], setting the value to `Arc` makes them use
+//!   [`Arc`](std::sync::Arc).
+//! * `ruma_unstable_exhaustive_types` -- Most types in synapse-admin-api are marked as
+//!   non-exhaustive to avoid breaking changes when new fields are added in the API. This setting
+//!   compiles all types as exhaustive. By enabling this feature you opt out of all semver
+//!   guarantees synapse-admin-api otherwise provides.
+//!
 //! [api]: https://github.com/matrix-org/synapse/tree/master/docs/admin_api
 
 // FIXME: don't allow dead code, warn on missing docs

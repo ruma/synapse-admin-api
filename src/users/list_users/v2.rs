@@ -97,6 +97,7 @@ impl Response {
 
 /// A minor set of user details.
 #[derive(Serialize, Deserialize, Clone, Debug)]
+#[cfg_attr(not(ruma_unstable_exhaustive_types), non_exhaustive)]
 pub struct UserMinorDetails {
     /// The user's name.
     pub name: String,
@@ -127,4 +128,21 @@ pub struct UserMinorDetails {
     /// Whether the account is locked.
     #[serde(default, deserialize_with = "crate::serde::bool_or_uint")]
     pub locked: bool,
+}
+
+impl UserMinorDetails {
+    /// Construct a `UserMinorDetails` with the given user name and all the other fields set to
+    /// their default value.
+    pub fn new(name: String) -> Self {
+        Self {
+            name,
+            is_guest: false,
+            admin: false,
+            user_type: None,
+            deactivated: false,
+            displayname: String::new(),
+            avatar_url: None,
+            locked: false,
+        }
+    }
 }

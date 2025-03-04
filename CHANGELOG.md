@@ -8,6 +8,10 @@ Breaking changes:
 * `RoomSortOrder` and `RoomDirection` in `rooms::list_rooms::v1` are now non-
   exhaustive. Their `PartialOrd` and `Ord` implementations now use their string
   representation instead of the order in which they are defined in the enum.
+* `UserDetails`, `ExternalId`, `CurrentUpdate`, `ExperimentalFeatures`,
+  `RoomDetails` and `UserMinorDetails` are now non-exhaustive. To keep using
+  them as if they were exhaustive, use the `ruma_unstable_exhaustive_types`
+  compile-time `cfg` setting.
 
 Improvement:
 

@@ -28,7 +28,12 @@ pub struct Response {
     pub current_updates: HashMap<String, CurrentUpdate>,
 }
 
+/// Information about a current update.
+///
+/// To create an instance of this type, first create a `CurrentUpdateInit` and convert it via
+/// `CurrentUpdate::from` / `.into()`.
 #[derive(Serialize, Deserialize, PartialEq, Clone, Debug)]
+#[cfg_attr(not(ruma_unstable_exhaustive_types), non_exhaustive)]
 pub struct CurrentUpdate {
     /// Name of the update.
     pub name: String,
@@ -41,6 +46,33 @@ pub struct CurrentUpdate {
 
     /// Items processed per millisecond based on an exponential average.
     pub average_items_per_ms: f64,
+}
+
+/// Initial set of fields of [`CurrentUpdate`].
+///
+/// This struct will not be updated even if additional fields are added to `CurrentUpdate`.
+#[derive(Debug)]
+#[allow(clippy::exhaustive_structs)]
+pub struct CurrentUpdateInit {
+    /// Name of the update.
+    pub name: String,
+
+    /// Total number of processed "items".
+    pub total_item_count: u64,
+
+    /// Runtime of background process, not including sleeping time.
+    pub total_duration_ms: f64,
+
+    /// Items processed per millisecond based on an exponential average.
+    pub average_items_per_ms: f64,
+}
+
+impl From<CurrentUpdateInit> for CurrentUpdate {
+    fn from(value: CurrentUpdateInit) -> Self {
+        let CurrentUpdateInit { name, total_item_count, total_duration_ms, average_items_per_ms } =
+            value;
+        Self { name, total_item_count, total_duration_ms, average_items_per_ms }
+    }
 }
 
 impl Request {
