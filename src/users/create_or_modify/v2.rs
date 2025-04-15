@@ -2,9 +2,10 @@
 
 use ruma::{
     api::{metadata, request, response, Metadata},
-    thirdparty::ThirdPartyIdentifier,
+    thirdparty::Medium,
     OwnedUserId,
 };
+use serde::{Deserialize, Serialize};
 
 pub use crate::users::{ExternalId, UserDetails};
 
@@ -105,4 +106,15 @@ impl Response {
     pub fn new(details: UserDetails) -> Self {
         Self { details }
     }
+}
+
+/// An identifier external to Matrix.
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[cfg_attr(not(ruma_unstable_exhaustive_types), non_exhaustive)]
+pub struct ThirdPartyIdentifier {
+    /// The third party identifier address.
+    pub address: String,
+
+    /// The medium of third party identifier.
+    pub medium: Medium,
 }
