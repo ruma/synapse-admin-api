@@ -2,8 +2,7 @@
 use ruma::{
     api::{metadata, request, response, Metadata},
     events::room::{guest_access::GuestAccess, history_visibility::HistoryVisibility},
-    room::RoomType,
-    space::SpaceRoomJoinRule,
+    room::{JoinRuleKind, RoomType},
     uint, OwnedMxcUri, OwnedRoomAliasId, OwnedRoomId, OwnedUserId, UInt,
 };
 
@@ -12,7 +11,7 @@ const METADATA: Metadata = metadata! {
     rate_limited: false,
     authentication: AccessToken,
     history: {
-        unstable => "/_synapse/admin/v1/rooms/:room_id",
+        unstable => "/_synapse/admin/v1/rooms/{room_id}",
     }
 };
 
@@ -68,7 +67,7 @@ pub struct Response {
     pub public: bool,
 
     /// Join rules of the room.
-    pub join_rules: Option<SpaceRoomJoinRule>,
+    pub join_rules: Option<JoinRuleKind>,
 
     /// Guest access of the room
     pub guest_access: Option<GuestAccess>,

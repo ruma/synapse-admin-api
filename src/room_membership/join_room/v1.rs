@@ -10,7 +10,7 @@ const METADATA: Metadata = metadata! {
     rate_limited: false,
     authentication: AccessToken,
     history: {
-        unstable => "/_synapse/admin/v1/join/:room_id_or_alias",
+        unstable => "/_synapse/admin/v1/join/{room_id_or_alias}",
     }
 };
 

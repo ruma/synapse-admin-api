@@ -10,7 +10,7 @@ const METADATA: Metadata = metadata! {
     rate_limited: false,
     authentication: AccessToken,
     history: {
-        unstable => "/_synapse/admin/v1/users/:user_id/admin",
+        unstable => "/_synapse/admin/v1/users/{user_id}/admin",
     }
 };
 
