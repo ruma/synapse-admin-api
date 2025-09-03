@@ -2,9 +2,8 @@
 use ruma::{
     api::{metadata, request, response, Metadata},
     events::room::{guest_access::GuestAccess, history_visibility::HistoryVisibility},
-    room::RoomType,
+    room::{JoinRuleKind, RoomType},
     serde::{OrdAsRefStr, PartialEqAsRefStr, PartialOrdAsRefStr, StringEnum},
-    space::SpaceRoomJoinRule,
     uint, OwnedRoomAliasId, OwnedRoomId, OwnedUserId, UInt,
 };
 use serde::{Deserialize, Serialize};
@@ -183,7 +182,7 @@ pub struct RoomDetails {
     pub public: bool,
 
     /// Join rules of the room.
-    pub join_rules: Option<SpaceRoomJoinRule>,
+    pub join_rules: Option<JoinRuleKind>,
 
     /// Guest access of the room
     pub guest_access: Option<GuestAccess>,

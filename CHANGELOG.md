@@ -13,6 +13,7 @@ Breaking changes:
   them as if they were exhaustive, use the `ruma_unstable_exhaustive_types`
   compile-time `cfg` setting.
 * Changed `users::create_or_modify::v2` third party id parsing by adding a new type without `validated_at` and `added_at` fields (which are not sent according to the API documentation)
+* Upgrade ruma to 0.13.0
 
 Improvement:
 
