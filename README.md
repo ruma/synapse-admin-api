@@ -4,4 +4,4 @@
 [![docs.rs page](https://docs.rs/synapse-admin-api/badge.svg)](https://docs.rs/synapse-admin-api/)
 ![license: MIT](https://img.shields.io/crates/l/synapse-admin-api.svg)
 
-**synapse-admin-api** contains serializable types for the requests and responses for each endpoint in the [synapse admin API](https://github.com/matrix-org/synapse/tree/master/docs/admin_api).
+**synapse-admin-api** contains serializable types for the requests and responses for each endpoint in the [synapse admin API](https://github.com/element-hq/synapse/tree/master/docs/admin_api).

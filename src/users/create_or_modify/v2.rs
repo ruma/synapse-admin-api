@@ -1,4 +1,4 @@
-//! [PUT /_synapse/admin/v2/users/:user_id](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/user_admin_api.rst#create-or-modify-account)
+//! [PUT /_synapse/admin/v2/users/:user_id](https://github.com/element-hq/synapse/blob/master/docs/admin_api/user_admin_api.md#create-or-modify-account)
 
 use ruma::{
     api::{metadata, request, response, Metadata},

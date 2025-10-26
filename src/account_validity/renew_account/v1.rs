@@ -1,4 +1,4 @@
-//! [GET /_synapse/admin/v1/account_validity/validity](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/account_validity.rst)
+//! [GET /_synapse/admin/v1/account_validity/validity](https://github.com/element-hq/synapse/blob/master/docs/admin_api/account_validity.md)
 
 use ruma::{
     api::{metadata, request, response, Metadata},

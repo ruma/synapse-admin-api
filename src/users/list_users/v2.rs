@@ -1,4 +1,4 @@
-//! [GET /_synapse/admin/v2/users/:user_id](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/user_admin_api.rst#list-accountshttps://github.com/matrix-org/synapse/blob/master/docs/admin_api/user_admin_api.rst#query-user-account)
+//! [GET /_synapse/admin/v2/users](https://github.com/element-hq/synapse/blob/master/docs/admin_api/user_admin_api.md#list-accounts)
 
 use ruma::{
     api::{metadata, request, response, Metadata},

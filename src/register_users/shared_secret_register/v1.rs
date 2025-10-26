@@ -1,4 +1,4 @@
-//! [POST /_synapse/admin/v1/register](https://matrix-org.github.io/synapse/latest/admin_api/register_api.html#shared-secret-registration)
+//! [POST /_synapse/admin/v1/register](https://github.com/element-hq/synapse/blob/master/docs/admin_api/register_api.md)
 
 #[cfg(feature = "shared-secret-registration-mac")]
 use hmac::{digest::InvalidLength, Hmac, Mac};
@@ -89,7 +89,7 @@ impl Response {
 
 /// Calculate the MAC based on the given inputs.
 ///
-/// See <https://matrix-org.github.io/synapse/latest/admin_api/register_api.html#shared-secret-registration> for details.
+/// See <https://github.com/element-hq/synapse/blob/master/docs/admin_api/register_api.md> for details.
 #[cfg(feature = "shared-secret-registration-mac")]
 pub fn hmac(
     registration_shared_secret: &str,
