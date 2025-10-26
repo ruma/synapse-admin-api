@@ -1,4 +1,4 @@
-//! [GET /_synapse/admin/v1/register](https://matrix-org.github.io/synapse/latest/admin_api/register_api.html#shared-secret-registration)
+//! [GET /_synapse/admin/v1/register](https://github.com/element-hq/synapse/blob/master/docs/admin_api/register_api.md)
 
 use ruma::api::{metadata, request, response, Metadata};
 

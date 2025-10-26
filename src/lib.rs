@@ -15,7 +15,7 @@
 //!   compiles all types as exhaustive. By enabling this feature you opt out of all semver
 //!   guarantees synapse-admin-api otherwise provides.
 //!
-//! [api]: https://github.com/matrix-org/synapse/tree/master/docs/admin_api
+//! [api]: https://github.com/element-hq/synapse/tree/master/docs/admin_api
 
 // FIXME: don't allow dead code, warn on missing docs
 #![allow(dead_code)]

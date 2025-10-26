@@ -1,4 +1,4 @@
-//! [GET /_synapse/admin/v1/users/:user_id/joined_rooms](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/user_admin_api.rst#list-room-memberships-of-an-user)
+//! [GET /_synapse/admin/v1/users/:user_id/joined_rooms](https://github.com/element-hq/synapse/blob/master/docs/admin_api/user_admin_api.md#list-joined-rooms-of-a-user)
 
 use ruma::{
     api::{metadata, request, response, Metadata},

@@ -1,4 +1,4 @@
-//! [POST /_synapse/admin/v1/reset_password/:user_id](https://github.com/matrix-org/synapse/blob/master/docs/admin_api/user_admin_api.rst#reset-password)
+//! [POST /_synapse/admin/v1/reset_password/:user_id](https://github.com/element-hq/synapse/blob/master/docs/admin_api/user_admin_api.md#reset-password)
 
 use ruma::{
     api::{metadata, request, response, Metadata},
