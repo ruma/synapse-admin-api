@@ -1,21 +1,19 @@
 //! [GET /_synapse/admin/v1/rooms](https://github.com/element-hq/synapse/blob/master/docs/admin_api/rooms.md#list-room-api)
 use ruma::{
-    api::{metadata, request, response, Metadata},
+    api::{auth_scheme::AccessToken, metadata, request, response},
     events::room::{guest_access::GuestAccess, history_visibility::HistoryVisibility},
     room::{JoinRuleKind, RoomType},
-    serde::{OrdAsRefStr, PartialEqAsRefStr, PartialOrdAsRefStr, StringEnum},
+    serde::StringEnum,
     uint, OwnedRoomAliasId, OwnedRoomId, OwnedUserId, UInt,
 };
 use serde::{Deserialize, Serialize};
 
-const METADATA: Metadata = metadata! {
+metadata! {
     method: GET,
     rate_limited: false,
     authentication: AccessToken,
-    history: {
-        unstable => "/_synapse/admin/v1/rooms",
-    }
-};
+    path: "/_synapse/admin/v1/rooms",
+}
 
 #[request]
 #[derive(Default)]
@@ -81,7 +79,7 @@ impl Response {
 }
 
 /// Enum to define the sorting method of rooms.
-#[derive(Clone, PartialEqAsRefStr, Eq, PartialOrdAsRefStr, OrdAsRefStr, StringEnum)]
+#[derive(Clone, StringEnum)]
 #[ruma_enum(rename_all = "snake_case")]
 #[non_exhaustive]
 pub enum RoomSortOrder {
@@ -129,7 +127,7 @@ pub enum RoomSortOrder {
 }
 
 /// Enum to define the sort order direction.
-#[derive(Clone, PartialEqAsRefStr, Eq, PartialOrdAsRefStr, OrdAsRefStr, StringEnum)]
+#[derive(Clone, StringEnum)]
 #[non_exhaustive]
 pub enum SortDirection {
     /// Sort direction backward.

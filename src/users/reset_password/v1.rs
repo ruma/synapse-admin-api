@@ -1,18 +1,16 @@
 //! [POST /_synapse/admin/v1/reset_password/:user_id](https://github.com/element-hq/synapse/blob/master/docs/admin_api/user_admin_api.md#reset-password)
 
 use ruma::{
-    api::{metadata, request, response, Metadata},
+    api::{auth_scheme::AccessToken, metadata, request, response},
     OwnedUserId,
 };
 
-const METADATA: Metadata = metadata! {
+metadata! {
     method: POST,
     rate_limited: false,
     authentication: AccessToken,
-    history: {
-        unstable => "/_synapse/admin/v1/reset_password/{user_id}",
-    }
-};
+    path: "/_synapse/admin/v1/reset_password/{user_id}",
+}
 
 #[request]
 pub struct Request {

@@ -1,15 +1,13 @@
 //! [GET /_synapse/admin/v1/register](https://github.com/element-hq/synapse/blob/master/docs/admin_api/register_api.md)
 
-use ruma::api::{metadata, request, response, Metadata};
+use ruma::api::{auth_scheme::NoAuthentication, metadata, request, response};
 
-const METADATA: Metadata = metadata! {
+metadata! {
     method: GET,
     rate_limited: false,
-    authentication: None,
-    history: {
-        unstable => "/_synapse/admin/v1/register",
-    }
-};
+    authentication: NoAuthentication,
+    path: "/_synapse/admin/v1/register",
+}
 
 #[request]
 #[derive(Default)]

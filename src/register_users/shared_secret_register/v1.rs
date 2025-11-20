@@ -3,7 +3,7 @@
 #[cfg(feature = "shared-secret-registration-mac")]
 use hmac::{digest::InvalidLength, Hmac, Mac};
 use ruma::{
-    api::{metadata, request, response, Metadata},
+    api::{auth_scheme::NoAuthentication, metadata, request, response},
     OwnedDeviceId, OwnedServerName, OwnedUserId,
 };
 #[cfg(feature = "shared-secret-registration-mac")]
@@ -12,14 +12,12 @@ use sha1::Sha1;
 #[cfg(feature = "shared-secret-registration-mac")]
 type HmacSha1 = Hmac<Sha1>;
 
-const METADATA: Metadata = metadata! {
+metadata! {
     method: POST,
     rate_limited: false,
-    authentication: None,
-    history: {
-        unstable => "/_synapse/admin/v1/register",
-    }
-};
+    authentication: NoAuthentication,
+    path: "/_synapse/admin/v1/register",
+}
 
 #[request]
 #[derive(Default)]

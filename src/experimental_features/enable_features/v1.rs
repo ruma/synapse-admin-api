@@ -1,19 +1,17 @@
 //! [PUT /_synapse/admin/v1/experimental_features/:user_id](https://github.com/element-hq/synapse/blob/master/docs/admin_api/experimental_features.md#enablingdisabling-features)
 
 use ruma::{
-    api::{request, response, Metadata},
+    api::{auth_scheme::AccessToken, request, response},
     metadata, OwnedUserId,
 };
 use serde::{Deserialize, Serialize};
 
-const METADATA: Metadata = metadata! {
+metadata! {
     method: PUT,
     rate_limited: false,
     authentication: AccessToken,
-    history: {
-        unstable => "/_synapse/admin/v1/experimental_features/{user_id}",
-    }
-};
+    path: "/_synapse/admin/v1/experimental_features/{user_id}",
+}
 
 #[request]
 #[derive(Serialize, Deserialize, PartialEq)]

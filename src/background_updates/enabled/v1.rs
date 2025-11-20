@@ -1,19 +1,17 @@
 //! [POST /_synapse/admin/v1/background_updates/enabled](https://github.com/element-hq/synapse/blob/develop/docs/usage/administration/admin_api/background_updates.md#enabled)
 
 use ruma::{
-    api::{request, response, Metadata},
+    api::{auth_scheme::AccessToken, request, response},
     metadata,
 };
 use serde::{Deserialize, Serialize};
 
-const METADATA: Metadata = metadata! {
+metadata! {
     method: POST,
     rate_limited: false,
     authentication: AccessToken,
-    history: {
-        unstable => "/_synapse/admin/v1/background_updates/enabled",
-    }
-};
+    path: "/_synapse/admin/v1/background_updates/enabled",
+}
 
 #[request]
 pub struct Request {

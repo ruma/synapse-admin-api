@@ -1,16 +1,14 @@
 //! [GET /_synapse/admin/v1/server_version](https://github.com/element-hq/synapse/blob/master/docs/admin_api/version_api.md)
 
-use ruma::api::{metadata, request, response, Metadata};
+use ruma::api::{auth_scheme::NoAuthentication, metadata, request, response};
 use serde::{Deserialize, Serialize};
 
-const METADATA: Metadata = metadata! {
+metadata! {
     method: GET,
     rate_limited: false,
-    authentication: None, // AccessToken?
-    history: {
-        unstable => "/_synapse/admin/v1/server_version",
-    }
-};
+    authentication: NoAuthentication, // AccessToken?
+    path: "/_synapse/admin/v1/server_version",
+}
 
 #[request]
 #[derive(Default)]

@@ -1,6 +1,7 @@
 //! Endpoints in the `/_synapse/admin/v<x>/users/` scope.
 
 pub mod create_or_modify;
+pub mod deactivate_account;
 pub mod get_details;
 pub mod is_user_admin;
 pub mod list_joined_rooms;
