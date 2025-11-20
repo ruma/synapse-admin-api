@@ -1,19 +1,17 @@
 //! [GET /_synapse/admin/v2/users](https://github.com/element-hq/synapse/blob/master/docs/admin_api/user_admin_api.md#list-accounts)
 
 use ruma::{
-    api::{metadata, request, response, Metadata},
+    api::{auth_scheme::AccessToken, metadata, request, response},
     OwnedUserId, UInt,
 };
 use serde::{Deserialize, Serialize};
 
-const METADATA: Metadata = metadata! {
+metadata! {
     method: GET,
     rate_limited: false,
     authentication: AccessToken,
-    history: {
-        unstable => "/_synapse/admin/v2/users",
-    }
-};
+    path: "/_synapse/admin/v2/users",
+}
 
 #[request]
 #[derive(Default)]

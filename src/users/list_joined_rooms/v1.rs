@@ -1,18 +1,16 @@
 //! [GET /_synapse/admin/v1/users/:user_id/joined_rooms](https://github.com/element-hq/synapse/blob/master/docs/admin_api/user_admin_api.md#list-joined-rooms-of-a-user)
 
 use ruma::{
-    api::{metadata, request, response, Metadata},
+    api::{auth_scheme::AccessToken, metadata, request, response},
     OwnedRoomId, OwnedUserId, UInt,
 };
 
-const METADATA: Metadata = metadata! {
+metadata! {
     method: GET,
     rate_limited: false,
     authentication: AccessToken,
-    history: {
-        unstable => "/_synapse/admin/v1/users/{user_id}/joined_rooms",
-    }
-};
+    path: "/_synapse/admin/v1/users/{user_id}/joined_rooms",
+}
 
 #[request]
 pub struct Request {

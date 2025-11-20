@@ -8,7 +8,7 @@ keywords = ["matrix", "chat", "messaging", "ruma"]
 license = "MIT"
 repository = "https://github.com/ruma/synapse-admin-api"
 edition = "2021"
-rust-version = "1.82"
+rust-version = "1.88"
 
 [features]
 client = []
@@ -19,7 +19,7 @@ shared-secret-registration-mac = ["dep:hex", "dep:hmac", "dep:sha1"]
 [dependencies]
 hex = { version = "0.4.3", optional = true }
 hmac = { version = "0.12.1", optional = true }
-ruma = { version = "0.13.0", features = ["api", "events"] }
+ruma = { version = "0.14.0", features = ["api", "events"] }
 serde = { version = "1.0.118", features = ["derive"] }
 sha1 = { version = "0.10.1", optional = true }
 

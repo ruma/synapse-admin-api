@@ -1,7 +1,7 @@
 //! [PUT /_synapse/admin/v2/users/:user_id](https://github.com/element-hq/synapse/blob/master/docs/admin_api/user_admin_api.md#create-or-modify-account)
 
 use ruma::{
-    api::{metadata, request, response, Metadata},
+    api::{auth_scheme::AccessToken, metadata, request, response},
     thirdparty::Medium,
     OwnedUserId,
 };
@@ -9,14 +9,12 @@ use serde::{Deserialize, Serialize};
 
 pub use crate::users::{ExternalId, UserDetails};
 
-const METADATA: Metadata = metadata! {
+metadata! {
     method: PUT,
     rate_limited: false,
     authentication: AccessToken,
-    history: {
-        unstable => "/_synapse/admin/v2/users/{user_id}",
-    }
-};
+    path: "/_synapse/admin/v2/users/{user_id}",
+}
 
 #[request]
 pub struct Request {

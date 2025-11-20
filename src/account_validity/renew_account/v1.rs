@@ -1,18 +1,16 @@
 //! [GET /_synapse/admin/v1/account_validity/validity](https://github.com/element-hq/synapse/blob/master/docs/admin_api/account_validity.md)
 
 use ruma::{
-    api::{metadata, request, response, Metadata},
+    api::{auth_scheme::AccessToken, metadata, request, response},
     MilliSecondsSinceUnixEpoch, OwnedUserId,
 };
 
-const METADATA: Metadata = metadata! {
+metadata! {
     method: POST,
     rate_limited: false,
     authentication: AccessToken,
-    history: {
-        unstable => "/_synapse/admin/v1/account_validity/validity",
-    }
-};
+    path: "/_synapse/admin/v1/account_validity/validity",
+}
 
 #[request]
 pub struct Request {

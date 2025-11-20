@@ -1,18 +1,16 @@
 //! [GET /_synapse/admin/v1/users/:user_id/admin](https://github.com/element-hq/synapse/blob/master/docs/admin_api/user_admin_api.md#get-whether-a-user-is-a-server-administrator-or-not)
 
 use ruma::{
-    api::{metadata, request, response, Metadata},
+    api::{auth_scheme::AccessToken, metadata, request, response},
     OwnedUserId,
 };
 
-const METADATA: Metadata = metadata! {
+metadata! {
     method: GET,
     rate_limited: false,
     authentication: AccessToken,
-    history: {
-        unstable => "/_synapse/admin/v1/users/{user_id}/admin",
-    }
-};
+    path: "/_synapse/admin/v1/users/{user_id}/admin",
+}
 
 #[request]
 pub struct Request {

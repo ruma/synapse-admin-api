@@ -1,5 +1,11 @@
 # [unreleased]
 
+Breaking changes:
+
+- Upgrade Ruma to 0.14.0
+  - All endpoints use `SinglePath` rather than `VersionHistory` as `PathBuilder`.
+  - Bump MSRV to 1.88.
+
 # 0.8.0
 
 Breaking changes:

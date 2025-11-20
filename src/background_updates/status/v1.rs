@@ -2,17 +2,15 @@
 
 use std::collections::HashMap;
 
-use ruma::api::{metadata, request, response, Metadata};
+use ruma::api::{auth_scheme::AccessToken, metadata, request, response};
 use serde::{Deserialize, Serialize};
 
-const METADATA: Metadata = metadata! {
+metadata! {
     method: GET,
     rate_limited: false,
     authentication: AccessToken,
-    history: {
-        unstable => "/_synapse/admin/v1/background_updates/status",
-    }
-};
+    path: "/_synapse/admin/v1/background_updates/status",
+}
 
 #[request]
 #[derive(Default)]

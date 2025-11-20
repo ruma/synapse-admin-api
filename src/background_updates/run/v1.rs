@@ -1,19 +1,17 @@
 //! [POST /_synapse/admin/v1/background_updates/start_job](https://github.com/element-hq/synapse/blob/master/docs/usage/administration/admin_api/background_updates.md#run)
 
 use ruma::{
-    api::{request, response, Metadata},
+    api::{auth_scheme::AccessToken, request, response},
     metadata,
-    serde::{PartialEqAsRefStr, StringEnum},
+    serde::StringEnum,
 };
 
-const METADATA: Metadata = metadata! {
+metadata! {
     method: POST,
     rate_limited: false,
     authentication: AccessToken,
-    history: {
-        unstable => "/_synapse/admin/v1/background_updates/start_job",
-    }
-};
+    path: "/_synapse/admin/v1/background_updates/start_job",
+}
 
 #[request]
 pub struct Request {
@@ -39,7 +37,7 @@ impl Response {
     }
 }
 
-#[derive(Clone, PartialEqAsRefStr, Eq, StringEnum)]
+#[derive(Clone, StringEnum)]
 #[ruma_enum(rename_all = "snake_case")]
 #[non_exhaustive]
 pub enum JobName {

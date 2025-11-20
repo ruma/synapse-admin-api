@@ -1,18 +1,16 @@
 //! [POST /_synapse/admin/v1/join/:room_id_or_alias](https://github.com/element-hq/synapse/blob/master/docs/admin_api/room_membership.md)
 
 use ruma::{
-    api::{request, response, Metadata},
+    api::{auth_scheme::AccessToken, request, response},
     metadata, OwnedRoomId, OwnedRoomOrAliasId, OwnedUserId,
 };
 
-const METADATA: Metadata = metadata! {
+metadata! {
     method: POST,
     rate_limited: false,
     authentication: AccessToken,
-    history: {
-        unstable => "/_synapse/admin/v1/join/{room_id_or_alias}",
-    }
-};
+    path: "/_synapse/admin/v1/join/{room_id_or_alias}",
+}
 
 #[request]
 pub struct Request {
