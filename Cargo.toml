@@ -7,7 +7,7 @@ homepage = "https://ruma.dev/"
 keywords = ["matrix", "chat", "messaging", "ruma"]
 license = "MIT"
 repository = "https://github.com/ruma/synapse-admin-api"
-edition = "2021"
+edition = "2024"
 rust-version = "1.88"
 
 [features]
