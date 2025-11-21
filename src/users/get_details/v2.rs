@@ -1,8 +1,8 @@
 //! [GET /_synapse/admin/v2/users/:user_id](https://github.com/element-hq/synapse/blob/master/docs/admin_api/user_admin_api.md#query-user-account)
 
 use ruma::{
-    api::{auth_scheme::AccessToken, metadata, request, response},
     OwnedUserId,
+    api::{auth_scheme::AccessToken, metadata, request, response},
 };
 
 pub use crate::users::UserDetails;

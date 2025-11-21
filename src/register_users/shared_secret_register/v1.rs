@@ -1,10 +1,10 @@
 //! [POST /_synapse/admin/v1/register](https://github.com/element-hq/synapse/blob/master/docs/admin_api/register_api.md)
 
 #[cfg(feature = "shared-secret-registration-mac")]
-use hmac::{digest::InvalidLength, Hmac, Mac};
+use hmac::{Hmac, Mac, digest::InvalidLength};
 use ruma::{
-    api::{auth_scheme::NoAuthentication, metadata, request, response},
     OwnedDeviceId, OwnedServerName, OwnedUserId,
+    api::{auth_scheme::NoAuthentication, metadata, request, response},
 };
 #[cfg(feature = "shared-secret-registration-mac")]
 use sha1::Sha1;
@@ -103,13 +103,7 @@ pub fn hmac(
     mac.update(b"\x00");
     mac.update(password.as_bytes());
     mac.update(b"\x00");
-    mac.update({
-        if admin {
-            b"admin"
-        } else {
-            b"notadmin"
-        }
-    });
+    mac.update(if admin { b"admin" } else { b"notadmin" });
     let mac = mac.finalize();
     let mac = hex::encode(mac.into_bytes());
 

@@ -1,8 +1,9 @@
 //! [POST /_synapse/admin/v1/join/:room_id_or_alias](https://github.com/element-hq/synapse/blob/master/docs/admin_api/room_membership.md)
 
 use ruma::{
+    OwnedRoomId, OwnedRoomOrAliasId, OwnedUserId,
     api::{auth_scheme::AccessToken, request, response},
-    metadata, OwnedRoomId, OwnedRoomOrAliasId, OwnedUserId,
+    metadata,
 };
 
 metadata! {

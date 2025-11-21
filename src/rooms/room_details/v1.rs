@@ -1,9 +1,10 @@
 //! [GET /_synapse/admin/v1/rooms/:room_id](https://github.com/element-hq/synapse/blob/master/docs/admin_api/rooms.md#room-details-api)
 use ruma::{
+    OwnedMxcUri, OwnedRoomAliasId, OwnedRoomId, OwnedUserId, UInt,
     api::{auth_scheme::AccessToken, metadata, request, response},
     events::room::{guest_access::GuestAccess, history_visibility::HistoryVisibility},
     room::{JoinRuleKind, RoomType},
-    uint, OwnedMxcUri, OwnedRoomAliasId, OwnedRoomId, OwnedUserId, UInt,
+    uint,
 };
 
 metadata! {

@@ -1,8 +1,8 @@
 //! [POST /_synapse/admin/v1/deactivate/:user_id](https://github.com/element-hq/synapse/blob/develop/docs/admin_api/user_admin_api.md#deactivate-account)
 
 use ruma::{
-    api::{auth_scheme::AccessToken, metadata, request, response},
     OwnedUserId,
+    api::{auth_scheme::AccessToken, metadata, request, response},
 };
 
 metadata! {

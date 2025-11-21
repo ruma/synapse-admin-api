@@ -1,10 +1,11 @@
 //! [GET /_synapse/admin/v1/rooms](https://github.com/element-hq/synapse/blob/master/docs/admin_api/rooms.md#list-room-api)
 use ruma::{
+    OwnedRoomAliasId, OwnedRoomId, OwnedUserId, UInt,
     api::{auth_scheme::AccessToken, metadata, request, response},
     events::room::{guest_access::GuestAccess, history_visibility::HistoryVisibility},
     room::{JoinRuleKind, RoomType},
     serde::StringEnum,
-    uint, OwnedRoomAliasId, OwnedRoomId, OwnedUserId, UInt,
+    uint,
 };
 use serde::{Deserialize, Serialize};
 

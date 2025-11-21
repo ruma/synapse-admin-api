@@ -8,7 +8,7 @@ pub mod list_joined_rooms;
 pub mod list_users;
 pub mod reset_password;
 
-use ruma::{thirdparty::ThirdPartyIdentifier, SecondsSinceUnixEpoch};
+use ruma::{SecondsSinceUnixEpoch, thirdparty::ThirdPartyIdentifier};
 use serde::{Deserialize, Serialize};
 
 /// User details

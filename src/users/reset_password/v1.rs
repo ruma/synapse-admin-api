@@ -1,8 +1,8 @@
 //! [POST /_synapse/admin/v1/reset_password/:user_id](https://github.com/element-hq/synapse/blob/master/docs/admin_api/user_admin_api.md#reset-password)
 
 use ruma::{
-    api::{auth_scheme::AccessToken, metadata, request, response},
     OwnedUserId,
+    api::{auth_scheme::AccessToken, metadata, request, response},
 };
 
 metadata! {

@@ -1,8 +1,9 @@
 //! [GET /_synapse/admin/v1/experimental_features/:user_id](https://github.com/element-hq/synapse/blob/develop/docs/admin_api/experimental_features.md#listing-enabled-features)
 
 use ruma::{
+    OwnedUserId,
     api::{auth_scheme::AccessToken, request, response},
-    metadata, OwnedUserId,
+    metadata,
 };
 use serde::{Deserialize, Serialize};
 

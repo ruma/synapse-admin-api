@@ -1,7 +1,7 @@
 //! [GET /_synapse/admin/v1/rooms/:room_id/members](https://github.com/element-hq/synapse/blob/master/docs/admin_api/rooms.md#room-members-api)
 use ruma::{
-    api::{auth_scheme::AccessToken, metadata, request, response},
     OwnedRoomId, OwnedUserId, UInt,
+    api::{auth_scheme::AccessToken, metadata, request, response},
 };
 
 metadata! {

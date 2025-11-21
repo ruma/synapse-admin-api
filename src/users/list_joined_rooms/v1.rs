@@ -1,8 +1,8 @@
 //! [GET /_synapse/admin/v1/users/:user_id/joined_rooms](https://github.com/element-hq/synapse/blob/master/docs/admin_api/user_admin_api.md#list-joined-rooms-of-a-user)
 
 use ruma::{
-    api::{auth_scheme::AccessToken, metadata, request, response},
     OwnedRoomId, OwnedUserId, UInt,
+    api::{auth_scheme::AccessToken, metadata, request, response},
 };
 
 metadata! {
