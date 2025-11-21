@@ -3,7 +3,7 @@ name: CI
 env:
   CARGO_TERM_COLOR: always
   CARGO_REGISTRIES_CRATES_IO_PROTOCOL: sparse
-  NIGHTLY: nightly-2025-08-08
+  NIGHTLY: nightly-2025-11-06
 
 on:
   push:
@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Install rust nightly toolchain
         uses: dtolnay/rust-toolchain@master
@@ -27,7 +27,7 @@ jobs:
       - uses: Swatinem/rust-cache@v2
 
       - name: Check spelling
-        uses: crate-ci/typos@v1.36.0
+        uses: crate-ci/typos@v1.39.2
 
       - name: Install cargo-sort
         uses: taiki-e/cache-cargo-install-action@v2
@@ -44,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Install MSRV toolchain
         uses: dtolnay/rust-toolchain@master
@@ -75,7 +75,7 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Install rust stable toolchain
         uses: dtolnay/rust-toolchain@stable
@@ -104,7 +104,7 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Install rust nightly toolchain
         uses: dtolnay/rust-toolchain@master
