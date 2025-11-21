@@ -1,9 +1,9 @@
 //! [PUT /_synapse/admin/v2/users/:user_id](https://github.com/element-hq/synapse/blob/master/docs/admin_api/user_admin_api.md#create-or-modify-account)
 
 use ruma::{
+    OwnedUserId,
     api::{auth_scheme::AccessToken, metadata, request, response},
     thirdparty::Medium,
-    OwnedUserId,
 };
 use serde::{Deserialize, Serialize};
 

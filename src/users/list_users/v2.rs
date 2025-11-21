@@ -1,8 +1,8 @@
 //! [GET /_synapse/admin/v2/users](https://github.com/element-hq/synapse/blob/master/docs/admin_api/user_admin_api.md#list-accounts)
 
 use ruma::{
-    api::{auth_scheme::AccessToken, metadata, request, response},
     OwnedUserId, UInt,
+    api::{auth_scheme::AccessToken, metadata, request, response},
 };
 use serde::{Deserialize, Serialize};
 

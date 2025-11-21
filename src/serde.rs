@@ -1,6 +1,6 @@
 //! synapse admin api specific serde
 
-use serde::{de::Visitor, Deserializer};
+use serde::{Deserializer, de::Visitor};
 
 pub(crate) fn bool_or_uint<'de, D>(deserializer: D) -> Result<bool, D::Error>
 where
