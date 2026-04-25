@@ -1,6 +1,8 @@
-# [unreleased]
+# Changelog
 
-# 0.9.0
+## [unreleased]
+
+## 0.9.0
 
 Breaking changes:
 
@@ -8,7 +10,7 @@ Breaking changes:
   - All endpoints use `SinglePath` rather than `VersionHistory` as `PathBuilder`.
   - Bump MSRV to 1.88.
 
-# 0.8.0
+## 0.8.0
 
 Breaking changes:
 
@@ -33,32 +35,32 @@ Improvement:
 - Add room_details api
 - Add room_members api
 
-# 0.7.0
+## 0.7.0
 
-* Upgrade to ruma 0.12.0
-* Add room_membership api
+- Upgrade to ruma 0.12.0
+- Add room_membership api
 
-# 0.6.0
+## 0.6.0
 
-* Update v1/server_version endpoint response data with optional python_version key
-* Upgrade to ruma 0.9.4
-* Add background updates endpoints
+- Update v1/server_version endpoint response data with optional python_version key
+- Upgrade to ruma 0.9.4
+- Add background updates endpoints
 
-# 0.5.0
+## 0.5.0
 
-* Upgrade ruma dependency to 0.7.2
-* Work around a Synapse issue affecting sqlite configurations
+- Upgrade ruma dependency to 0.7.2
+- Work around a Synapse issue affecting sqlite configurations
 
-# 0.4.0
+## 0.4.0
 
-* Upgrade ruma dependency to 0.6.4
+- Upgrade ruma dependency to 0.6.4
 
-# 0.3.0
+## 0.3.0
 
-* Upgrade ruma dependency to 0.5.0
+- Upgrade ruma dependency to 0.5.0
 
-# 0.2.0
+## 0.2.0
 
 Improvements:
 
-* Upgrade ruma dependency to 0.4.0
+- Upgrade ruma dependency to 0.4.0
