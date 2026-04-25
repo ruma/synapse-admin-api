@@ -14,30 +14,7 @@ on:
 jobs:
   style:
     name: Style
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v6
-
-      - name: Install rust nightly toolchain
-        uses: dtolnay/rust-toolchain@master
-        with:
-          toolchain: ${{ env.NIGHTLY }}
-
-      - uses: Swatinem/rust-cache@v2
-
-      - name: Check spelling
-        uses: crate-ci/typos@v1.39.2
-
-      - name: Install cargo-sort
-        uses: taiki-e/cache-cargo-install-action@v2
-        with:
-          tool: cargo-sort
-
-      - name: Run cargo-sort
-        run: |
-          cargo sort --workspace --grouped --check \
-                     --order package,lib,features,dependencies,target,dev-dependencies,build-dependencies
+    uses: ruma/ruma/.github/workflows/style.yml@main
 
   msrv:
     name: Minimum Supported Rust Version / Check All Features
