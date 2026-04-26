@@ -2,6 +2,11 @@
 
 ## [unreleased]
 
+Breaking changes:
+
+- Upgrade Ruma to 0.15.0
+  - Bump MSRV to 1.89.
+
 ## 0.9.0
 
 Breaking changes:
