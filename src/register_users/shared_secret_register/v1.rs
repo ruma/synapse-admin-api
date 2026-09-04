@@ -1,7 +1,7 @@
 //! [POST /_synapse/admin/v1/register](https://github.com/element-hq/synapse/blob/master/docs/admin_api/register_api.md)
 
 #[cfg(feature = "shared-secret-registration-mac")]
-use hmac::{Hmac, Mac, digest::InvalidLength};
+use hmac::{Hmac, KeyInit as _, Mac, digest::InvalidLength};
 use ruma::{
     OwnedDeviceId, OwnedServerName, OwnedUserId,
     api::{auth_scheme::NoAuthentication, metadata, request, response},
